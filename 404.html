@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Page not found — David</title>
+<meta name="description" content="That page doesn't exist." />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#08090c" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#f6f6f8" media="(prefers-color-scheme: light)" />
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" />
+<link rel="stylesheet" href="css/style.css" />
+
+<script>
+(function () {
+    var r = document.documentElement;
+    r.classList.add("js");
+    try {
+        var saved = localStorage.getItem("theme");
+        var sys = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        r.dataset.theme = saved === "light" || saved === "dark" ? saved : sys;
+    } catch (e) {
+        r.dataset.theme = "dark";
+    }
+})();
+</script>
+</head>
+
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" data-cursor aria-hidden="true"><i></i></div>
+
+<main class="notfound">
+    <div class="hero__bg" aria-hidden="true">
+        <span class="orb orb--1"></span>
+        <span class="orb orb--2"></span>
+    </div>
+
+    <div class="container">
+        <p class="eyebrow" style="justify-content:center">Error</p>
+        <p class="notfound__code">404</p>
+        <h1 class="h2" style="margin-top:1rem">This page took a wrong turn</h1>
+        <p class="lead" style="margin:1rem auto 0; max-width:34rem">
+            The link is broken or the page has moved. Nothing here is on fire — let's get you back.
+        </p>
+
+        <div class="notfound__actions">
+            <a class="btn btn--primary btn--lg" href="/" data-magnetic>
+                <span class="btn__label">
+                    Back home
+                    <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                </span>
+            </a>
+            <a class="btn btn--ghost btn--lg" href="/projects.html" data-magnetic>
+                <span class="btn__label">See the work</span>
+            </a>
+        </div>
+    </div>
+</main>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

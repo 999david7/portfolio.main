@@ -1,11 +1,13 @@
 {
   "name": "portfolio-main",
-  "version": "1.0.0",
-  "description": "Portfolio site with contact API",
+  "version": "2.0.0",
+  "private": true,
+  "description": "David's portfolio — static front end with a hardened Node contact API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check js/main.js && node --check api/contact.js"
   },
   "engines": {
     "node": ">=18"

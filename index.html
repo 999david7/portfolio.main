@@ -1,648 +1,659 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="David — Web Developer & Designer. Building fast, clean, and beautiful digital experiences." />
-    <meta name="theme-color" content="#fafafa" />
-    <meta name="color-scheme" content="dark light" />
-    <title>David — Portfolio</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>David — Developer &amp; Designer</title>
+<meta name="description" content="David — developer and designer building fast, clean web experiences. Founder of bean4U. Available for freelance projects and collaborations." />
+<meta name="author" content="David" />
+<meta name="theme-color" content="#08090c" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#f6f6f8" media="(prefers-color-scheme: light)" />
 
-    <script>
-        document.documentElement.classList.add("js");
-    </script>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="David — Developer &amp; Designer" />
+<meta property="og:description" content="Building fast, clean web experiences. Founder of bean4U." />
+<meta property="og:image" content="imgs/personal_buisness_logo-removebg-preview.png" />
+<meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/cursor.css" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="imgs/personal_buisness_logo-removebg-preview.png" />
+<link rel="manifest" href="site.webmanifest" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" />
+<link rel="stylesheet" href="css/style.css" />
+
+<!-- Resolve the theme before first paint so there is no flash. -->
+<script>
+(function () {
+    var r = document.documentElement;
+    r.classList.add("js");
+    try {
+        var saved = localStorage.getItem("theme");
+        var sys = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        r.dataset.theme = saved === "light" || saved === "dark" ? saved : sys;
+    } catch (e) {
+        r.dataset.theme = "dark";
+    }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "David",
+  "jobTitle": "Web Developer & Designer",
+  "email": "mailto:999david01@gmx.at",
+  "url": "https://bean4u.coffee",
+  "sameAs": [
+    "https://github.com/999david7",
+    "https://www.instagram.com/999david01"
+  ]
+}
+</script>
 </head>
 
 <body>
-    <a href="#about" class="skip-link">Skip to content</a>
-    <!-- Custom Cursor -->
-    <div class="cursor" aria-hidden="true">
-        <div class="cursor-ball big"></div>
-        <div class="cursor-ball small"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"><span data-progress-bar></span></div>
+<div class="cursor" data-cursor aria-hidden="true"><i></i></div>
+
+<!-- ====================== NAV ====================== -->
+<header class="nav" data-nav>
+    <div class="nav__inner container">
+        <a class="nav__brand" href="#top" aria-label="David — back to top">
+            <span class="nav__mark" aria-hidden="true">D</span>
+            <span>David</span>
+        </a>
+
+        <nav class="nav__links" aria-label="Primary">
+            <a class="nav__link" href="#about">About</a>
+            <a class="nav__link" href="#work">Work</a>
+            <a class="nav__link" href="#journey">Journey</a>
+            <a class="nav__link" href="#faq">FAQ</a>
+            <a class="nav__link" href="#contact">Contact</a>
+        </nav>
+
+        <div class="nav__actions">
+            <button class="icon-btn theme-toggle" data-theme-toggle type="button"
+                    aria-label="Switch to light theme">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4" />
+                    <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+                </svg>
+            </button>
+
+            <a class="btn btn--sm btn--primary nav__cta" href="#contact" data-magnetic>
+                <span class="btn__label">
+                    Hire me
+                    <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                </span>
+            </a>
+
+            <button class="nav__burger" data-drawer-open type="button"
+                    aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+                <span></span><span></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="scrim" data-scrim hidden></div>
+
+<aside class="drawer" id="drawer" data-drawer aria-label="Menu" aria-hidden="true" inert>
+    <div class="drawer__head">
+        <span class="mono">Menu</span>
+        <button class="icon-btn" data-drawer-close type="button" aria-label="Close menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+        </button>
     </div>
 
-    <!-- Navigation -->
-    <header class="topBar" id="topBar" aria-label="Main Navigation">
-        <div class="topBar-inner">
-            <a class="brand hoverable" href="#top" aria-label="Back to top">
-                <span class="brand-text">David</span>
+    <nav class="drawer__links" aria-label="Mobile">
+        <a class="drawer__link" href="#about"   style="--d:0"><span class="mono">01</span> About</a>
+        <a class="drawer__link" href="#work"    style="--d:1"><span class="mono">02</span> Work</a>
+        <a class="drawer__link" href="#journey" style="--d:2"><span class="mono">03</span> Journey</a>
+        <a class="drawer__link" href="#faq"     style="--d:3"><span class="mono">04</span> FAQ</a>
+        <a class="drawer__link" href="#contact" style="--d:4"><span class="mono">05</span> Contact</a>
+    </nav>
+
+    <div class="drawer__foot">
+        <a class="btn btn--primary btn--block" href="#contact">
+            <span class="btn__label">Start a project</span>
+        </a>
+        <p class="mono" style="margin-top:1rem">999david01@gmx.at</p>
+    </div>
+</aside>
+
+<main id="main">
+
+<!-- ====================== HERO ====================== -->
+<section class="hero" id="top">
+    <div class="hero__bg" aria-hidden="true">
+        <span class="orb orb--1"></span>
+        <span class="orb orb--2"></span>
+        <span class="orb orb--3"></span>
+        <div class="hero__grid"></div>
+    </div>
+
+    <div class="container hero__inner">
+        <p class="pill" data-reveal><span class="pill__dot"></span> Available for new projects</p>
+
+        <h1 class="hero__title" data-split>Building digital experiences</h1>
+
+        <p class="hero__sub" data-reveal style="--d:1">
+            I'm David — a developer and designer from Austria. I build interfaces that
+            are fast, clean, and actually work. Founder of
+            <a href="https://bean4u.coffee" target="_blank" rel="noopener noreferrer"
+               style="color:var(--accent-ink)">bean4U</a>.
+        </p>
+
+        <div class="hero__actions" data-reveal style="--d:2">
+            <a class="btn btn--primary btn--lg" href="#work" data-magnetic>
+                <span class="btn__label">
+                    See my work
+                    <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                </span>
+            </a>
+            <a class="btn btn--ghost btn--lg btn--down" href="files/resume.pdf" download data-magnetic>
+                <span class="btn__label">
+                    Download résumé
+                    <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 4v12M6 12l6 6 6-6M4 20h16" />
+                    </svg>
+                </span>
+            </a>
+        </div>
+
+        <ul class="hero__meta" data-reveal style="--d:3">
+            <li><b data-count="2" data-suffix="+">2+</b><span class="mono">Years building</span></li>
+            <li><b data-count="12" data-suffix="+">12+</b><span class="mono">Projects shipped</span></li>
+            <li><b>Innsbruck</b><span class="mono">Austria · Remote</span></li>
+        </ul>
+    </div>
+
+    <a class="hero__scroll" href="#about" aria-label="Scroll to about">
+        <span>Scroll</span>
+        <i aria-hidden="true"></i>
+    </a>
+</section>
+
+<!-- ====================== TICKER ====================== -->
+<div class="ticker" aria-hidden="true">
+    <div class="ticker__track" data-ticker>
+        <span class="ticker__item"><img src="imgs/icons/js.png" alt="" width="22" height="22" />JavaScript</span>
+        <span class="ticker__dot"></span>
+        <span class="ticker__item"><img src="imgs/icons/ts.png" alt="" width="22" height="22" />TypeScript</span>
+        <span class="ticker__dot"></span>
+        <span class="ticker__item"><img src="imgs/icons/html.png" alt="" width="22" height="22" />HTML</span>
+        <span class="ticker__dot"></span>
+        <span class="ticker__item"><img src="imgs/icons/css.png" alt="" width="22" height="22" />CSS</span>
+        <span class="ticker__dot"></span>
+        <span class="ticker__item"><img src="imgs/icons/java.png" alt="" width="22" height="22" />Java</span>
+        <span class="ticker__dot"></span>
+        <span class="ticker__item"><img src="imgs/icons/python.png" alt="" width="22" height="22" />Python</span>
+        <span class="ticker__dot"></span>
+        <span class="ticker__item"><img src="imgs/icons/linux.png" alt="" width="22" height="22" />Linux</span>
+        <span class="ticker__dot"></span>
+        <span class="ticker__item"><img src="imgs/icons/chatgpt.png" alt="" width="22" height="22" />AI tooling</span>
+        <span class="ticker__dot"></span>
+    </div>
+</div>
+
+<!-- ====================== ABOUT ====================== -->
+<section class="section" id="about">
+    <div class="container">
+        <div class="section-head" data-reveal>
+            <span class="eyebrow">About</span>
+            <h2 class="h2">Your mentality<br />is your limit.</h2>
+        </div>
+
+        <div class="about__grid">
+            <div class="about__body" data-reveal>
+                <p class="lead">
+                    I build programs that are fast, clean, and just work. Most of what I do
+                    sits where engineering meets design — shipping interfaces that load
+                    instantly, read clearly, and feel good to use.
+                </p>
+                <p class="lead">
+                    Right now I'm studying at HTL Anichstraße, running bean4U, and taking on
+                    freelance work in web development and UI. If it isn't fast, it isn't good.
+                </p>
+
+                <div class="about__tools">
+                    <h3>Tools I reach for</h3>
+                    <div class="chips">
+                        <span class="chip">HTML</span>
+                        <span class="chip">CSS</span>
+                        <span class="chip">JavaScript</span>
+                        <span class="chip">TypeScript</span>
+                        <span class="chip">Java</span>
+                        <span class="chip">Python</span>
+                        <span class="chip">Node.js</span>
+                        <span class="chip">Git</span>
+                        <span class="chip">Linux</span>
+                        <span class="chip">Figma</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="idcard" data-reveal="right" style="--d:1">
+                <img class="idcard__logo" src="imgs/personal_buisness_logo-removebg-preview.png"
+                     alt="David's personal brand mark" width="500" height="500"
+                     loading="lazy" decoding="async" draggable="false" />
+                <div class="idcard__name">
+                    <b>David</b>
+                    <span class="mono">Developer &amp; Designer</span>
+                </div>
+                <ul class="idcard__rows">
+                    <li><span>Based in</span><span>Innsbruck, AT</span></li>
+                    <li><span>Focus</span><span>Web &amp; UI</span></li>
+                    <li><span>Building</span><span>bean4U</span></li>
+                    <li><span>Status</span><span style="color:var(--success)">Open to work</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="stats" data-reveal>
+            <div class="stat"><b data-count="2" data-suffix="+">2+</b><span>Years building</span></div>
+            <div class="stat"><b data-count="12" data-suffix="+">12+</b><span>Projects shipped</span></div>
+            <div class="stat"><b data-count="100" data-suffix="%">100%</b><span>Hand-written code</span></div>
+            <div class="stat"><b>A+</b><span>Taste</span></div>
+        </div>
+
+        <div class="caps">
+            <article class="card card--spot cap" data-reveal style="--d:0">
+                <span class="cap__num">01</span>
+                <h3>Technical &amp; analytical</h3>
+                <p>Process optimisation, solid technical grounding, and structured problem solving.</p>
+            </article>
+            <article class="card card--spot cap" data-reveal style="--d:1">
+                <span class="cap__num">02</span>
+                <h3>Business sense</h3>
+                <p>Cost awareness and strategic planning — I build things that make sense commercially.</p>
+            </article>
+            <article class="card card--spot cap" data-reveal style="--d:2">
+                <span class="cap__num">03</span>
+                <h3>Communication</h3>
+                <p>Translating cleanly between engineering and management. No jargon walls.</p>
+            </article>
+            <article class="card card--spot cap" data-reveal style="--d:3">
+                <span class="cap__num">04</span>
+                <h3>Self-management</h3>
+                <p>Structured, reliable, flexible. I ship on the timeline I commit to.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ====================== WORK ====================== -->
+<section class="section" id="work">
+    <div class="container">
+        <div class="section-head" data-reveal>
+            <span class="eyebrow">Work</span>
+            <h2 class="h2">Selected projects</h2>
+            <p class="lead" style="margin-top:1rem">
+                A few things I've built recently. Every one of them is live.
+            </p>
+        </div>
+
+        <div class="work__grid">
+            <a class="card card--spot card--tilt project" data-reveal style="--d:0"
+               href="https://bean4u.coffee" target="_blank" rel="noopener noreferrer">
+                <div class="project__top">
+                    <span class="project__tag">Web</span>
+                    <time class="project__year" datetime="2025">2025</time>
+                </div>
+                <h3 class="project__title">
+                    bean4U
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M7 17 17 7M8 7h9v9" />
+                    </svg>
+                </h3>
+                <p class="project__desc">
+                    My coffee recipe platform. Clean UI, fast pages, and a brand built from scratch.
+                </p>
+                <div class="chips project__tags">
+                    <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JS</span>
+                </div>
             </a>
 
-            <nav class="topNav" aria-label="Primary Navigation">
-                <a class="topLink hoverable" href="#about">About</a>
-                <a class="topLink hoverable" href="#history">History</a>
-                <a class="topLink hoverable" href="#skills">Skills</a>
-                <a class="topLink hoverable" href="#projects">Projects</a>
-                <a class="topLink hoverable" href="#testimonials">Testimonials</a>
-                <a class="topLink hoverable" href="#faq">FAQ</a>
-                <a class="topLink hoverable" href="#contact">Contact</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="top" class="hero" aria-label="Hero" tabindex="-1">
-        <div class="hero-content">
-            <h1 class="hero-title">
-                <span class="hero-line">Building</span>
-                <span class="hero-line">digital</span>
-                <span class="hero-line accent">experiences</span>
-            </h1>
-            <p class="hero-subtitle">Fast, clean, and just work.</p>
-        </div>
-        <div class="hero-scroll" aria-hidden="true">
-            <div class="scroll-indicator"></div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about sectionFade" aria-label="About">
-        <div class="about-inner">
-            <div class="section-header">
-                <span class="section-eyebrow">About</span>
-                <h2 class="section-title">Your mentality is your limit</h2>
-                <p class="section-text">
-                    I build programs that are fast, clean and just work. 
-                    Focused on creating digital experiences that combine 
-                    technical excellence with thoughtful design.
+            <a class="card card--spot card--tilt project" data-reveal style="--d:1"
+               href="https://github.com/999david7/portfolio.main" target="_blank" rel="noopener noreferrer">
+                <div class="project__top">
+                    <span class="project__tag">App</span>
+                    <time class="project__year" datetime="2025">2025</time>
+                </div>
+                <h3 class="project__title">
+                    This portfolio
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M7 17 17 7M8 7h9v9" />
+                    </svg>
+                </h3>
+                <p class="project__desc">
+                    Zero dependencies on the front end, a Node contact API on the back. Every pixel hand-written.
                 </p>
-            </div>
-
-            <div class="about-content">
-                <div class="about-media">
-                    <div class="about-image-wrapper">
-                        <img 
-                            src="imgs/images.jpg" 
-                            alt="David — Web Developer"
-                            class="about-image"
-                            width="200"
-                            height="300"
-                            loading="lazy"
-                            decoding="async"
-                        />
-                    </div>
-
-                    <div class="about-actions">
-                        <a
-                            href="/files/resume.pdf"
-                            class="btn btn-primary fancy-btn"
-                            download="resume.pdf"
-                            aria-label="Download Resume"
-                        >
-                            <span class="btn-text btn-text-top">Resume</span>
-                            <span class="btn-text btn-text-bottom">Download</span>
-                            <svg class="wave wave-back" viewBox="0 0 2400 800" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <defs>
-                                    <linearGradient id="wave-grad" x1="50%" y1="0%" x2="50%" y2="100%">
-                                        <stop offset="0%" stop-color="hsl(37, 99%, 67%)"/>
-                                        <stop offset="100%" stop-color="hsl(316, 73%, 52%)"/>
-                                    </linearGradient>
-                                </defs>
-                                <path fill="url(#wave-grad)" d="M0 306Q228 450 600 302T1200 343T1800 320T2400 314V800H0Z"/>
-                            </svg>
-                            <svg class="wave wave-front" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M0,288L1440,160L1440,320L0,320Z"/>
-                            </svg>
-                        </a>
-                        <a 
-                            href="https://github.com/999david01" 
-                            class="btn btn-secondary"
-                            target="_blank"
-                            rel="noreferrer noopener"
-                            aria-label="Visit GitHub Profile"
-                        >
-                            GitHub
-                        </a>
-                    </div>
+                <div class="chips project__tags">
+                    <span class="chip">Node</span><span class="chip">Motion</span><span class="chip">Design</span>
                 </div>
+            </a>
 
-                <div class="about-stats">
-                    <div class="stat">
-                        <div class="stat-value">2+</div>
-                        <div class="stat-label">Years Building</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">5+</div>
-                        <div class="stat-label">Projects Shipped</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">A+</div>
-                        <div class="stat-label">Taste</div>
-                    </div>
+            <a class="card card--spot card--tilt project" data-reveal style="--d:2"
+               href="https://github.com/999david7/Formula-Arch" target="_blank" rel="noopener noreferrer">
+                <div class="project__top">
+                    <span class="project__tag">Tool</span>
+                    <time class="project__year" datetime="2026">2026</time>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Highlights -->
-    <section id="about-highlights" class="highlights sectionFade" aria-label="Highlights">
-        <div class="highlights-inner">
-            <div class="highlight-card">
-                <h3 class="highlight-title">Now</h3>
-                <p class="highlight-text">
-                    Working on web projects, UI polish, and building a strong portfolio 
-                    that actually converts.
+                <h3 class="project__title">
+                    Formula Arch
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M7 17 17 7M8 7h9v9" />
+                    </svg>
+                </h3>
+                <p class="project__desc">
+                    An Arch Linux ricing theme styled after Formula 1 liveries. Fast, loud, precise.
                 </p>
-            </div>
-
-            <div class="highlight-card">
-                <h3 class="highlight-title">Tools</h3>
-                <div class="chip-row">
-                    <span class="chip">HTML</span>
-                    <span class="chip">CSS</span>
-                    <span class="chip">JavaScript</span>
-                    <span class="chip">TypeScript</span>
-                    <span class="chip">Java</span>
-                    <span class="chip">Python</span>
-                    <span class="chip">Linux</span>
-                    <span class="chip">ChatGPT</span>
-                    <span class="chip">Gemini</span>
+                <div class="chips project__tags">
+                    <span class="chip">Arch Linux</span><span class="chip">Shell</span><span class="chip">Theming</span>
                 </div>
-            </div>
-
-            <div class="highlight-card">
-                <h3 class="highlight-title">Focus</h3>
-                <div class="chip-row">
-                    <span class="chip">Clean UI</span>
-                    <span class="chip">Speed</span>
-                    <span class="chip">Motion</span>
-                    <span class="chip">Brand</span>
-                    <span class="chip">Functionality</span>
-                </div>
-            </div>
-
-            <div class="highlight-card">
-                <h3 class="highlight-title">IDEs</h3>
-                <div class="chip-row">
-                    <span class="chip">Cursor</span>
-                    <span class="chip">VS Code</span>
-                    <span class="chip">IntelliJ</span>
-                    <span class="chip">PyCharm</span>
-                    <span class="chip">WebStorm</span>
-                    <span class="chip">DataSpell</span>
-                </div>
-            </div>
+            </a>
         </div>
-    </section>
 
-    <!-- Brand Statement -->
-    <section class="brand-statement sectionFade" aria-label="Brand Statement">
-        <div class="brand-statement-inner">
-            <img
-                class="brand-logo"
-                src="imgs/personal_buisness_logo-removebg-preview.png"
-                alt="Bean4U Logo"
-                draggable="false"
-                loading="lazy"
-                decoding="async"
-            />
-            <div class="brand-text-content">
-                <h2 class="brand-quote">your mentality is your limit</h2>
-                <p class="brand-subtitle">I'm the founder of bean4U</p>
-            </div>
+        <div class="work__more" data-reveal>
+            <a class="btn btn--ghost" href="projects.html" data-magnetic>
+                <span class="btn__label">
+                    All projects
+                    <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                </span>
+            </a>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- History Timeline -->
-    <section id="history" class="history sectionFade" aria-label="History">
-        <div class="history-inner">
-            <div class="section-header">
-                <span class="section-eyebrow">History</span>
-                <h2 class="section-title">Journey</h2>
-            </div>
-
-            <div class="history-timeline">
-                <div class="history-item">
-                    <div class="history-card">
-                        <div class="history-icon">
-                            <img 
-                                src="imgs/bean4U-startup.png" 
-                                alt="Bean4U"
-                                draggable="false"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="history-content">
-                            <time class="history-year">2024</time>
-                            <p class="history-text">
-                                I started my coffee recipe website called bean4U.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="history-item">
-                    <div class="history-card">
-                        <div class="history-icon">
-                            <img 
-                                src="imgs/htl-anichstrasse-logo.svg" 
-                                alt="HTL Anichstraße"
-                                draggable="false"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="history-content">
-                            <time class="history-year">2025</time>
-                            <p class="history-text">
-                                I started attending the technical college HTL Anichstraße.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="history-item">
-                    <div class="history-card">
-                        <div class="history-icon">
-                            <img 
-                                src="imgs/java.webp" 
-                                alt="Java"
-                                draggable="false"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="history-content">
-                            <time class="history-year">2025</time>
-                            <p class="history-text">
-                                I started learning Java.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="history-item">
-                    <div class="history-card">
-                        <div class="history-icon">
-                            <img 
-                                src="imgs/icons/js.png" 
-                                alt="JavaScript"
-                                draggable="false"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="history-content">
-                            <time class="history-year">Now</time>
-                            <p class="history-text">
-                                Building modern web experiences and polishing my personal brand.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- ====================== JOURNEY ====================== -->
+<section class="section" id="journey">
+    <div class="container">
+        <div class="section-head" data-reveal>
+            <span class="eyebrow">Journey</span>
+            <h2 class="h2">How I got here</h2>
         </div>
-    </section>
 
-    <!-- Skills Strip -->
-    <section class="skills-strip sectionFade" aria-label="Skills Strip">
-        <div class="skills-strip-content">
-            <p class="skills-slogan">If it isn't fast, it isn't good.</p>
-            <div class="skills-marquee">
-                <div class="skills-track">
-                    <div class="skill-icon"><img src="imgs/icons/js.png" alt="JavaScript" /></div>
-                    <div class="skill-icon"><img src="imgs/icons/ts.png" alt="TypeScript" /></div>
-                    <div class="skill-icon"><img src="imgs/icons/html.png" alt="HTML" /></div>
-                    <div class="skill-icon"><img src="imgs/icons/css.png" alt="CSS" /></div>
-                    <div class="skill-icon"><img src="imgs/icons/python.png" alt="Python" /></div>
-                    <div class="skill-icon"><img src="imgs/icons/java.png" alt="Java" /></div>
-                    <div class="skill-icon"><img src="imgs/icons/chatgpt.png" alt="ChatGPT" /></div>
-                    <div class="skill-icon"><img src="imgs/icons/linux.png" alt="Linux" /></div>
-                    <!-- Duplicate for seamless loop -->
-                    <div class="skill-icon"><img src="imgs/icons/js.png" alt="JavaScript" /></div>
-                    <div class="skill-icon"><img src="imgs/icons/ts.png" alt="TypeScript" /></div>
-                    <div class="skill-icon"><img src="imgs/icons/html.png" alt="HTML" /></div>
-                    <div class="skill-icon"><img src="imgs/icons/css.png" alt="CSS" /></div>
-                    <div class="skill-icon"><img src="imgs/icons/python.png" alt="Python" /></div>
-                    <div class="skill-icon"><img src="imgs/icons/java.png" alt="Java" /></div>
-                    <div class="skill-icon"><img src="imgs/icons/chatgpt.png" alt="ChatGPT" /></div>
-                    <div class="skill-icon"><img src="imgs/icons/linux.png" alt="Linux" /></div>
+        <div class="timeline" data-timeline>
+            <span class="timeline__progress" data-timeline-progress aria-hidden="true"></span>
+
+            <article class="card tl" data-reveal="left" data-tl style="--d:0">
+                <span class="tl__icon" aria-hidden="true">
+                    <!-- Inline glyph rather than the 2.2 MB startup screenshot,
+                         which was illegible at this size. -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z" />
+                        <path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17" />
+                        <path d="M8 3v2.5M12 2.5V5M16 3v2.5" />
+                    </svg>
+                </span>
+                <span class="tl__year">2024</span>
+                <div class="tl__body">
+                    <h3>Started bean4U</h3>
+                    <p>Launched my own coffee recipe website — my first real product, brand and all.</p>
                 </div>
-            </div>
+            </article>
+
+            <article class="card tl" data-reveal="left" data-tl style="--d:1">
+                <span class="tl__icon"><img src="imgs/htl-anichstrasse-logo.svg" alt="" width="40" height="40" loading="lazy" decoding="async" /></span>
+                <span class="tl__year">2025</span>
+                <div class="tl__body">
+                    <h3>HTL Anichstraße</h3>
+                    <p>Began at the technical college in Innsbruck, going deep on engineering fundamentals.</p>
+                </div>
+            </article>
+
+            <article class="card tl" data-reveal="left" data-tl style="--d:2">
+                <span class="tl__icon"><img src="imgs/java.webp" alt="" width="40" height="40" loading="lazy" decoding="async" /></span>
+                <span class="tl__year">2025</span>
+                <div class="tl__body">
+                    <h3>Picked up Java</h3>
+                    <p>Moved past scripting into typed, structured, object-oriented work.</p>
+                </div>
+            </article>
+
+            <article class="card tl" data-reveal="left" data-tl style="--d:3">
+                <span class="tl__icon"><img src="imgs/icons/js.png" alt="" width="40" height="40" loading="lazy" decoding="async" /></span>
+                <span class="tl__year">Now</span>
+                <div class="tl__body">
+                    <h3>Building &amp; freelancing</h3>
+                    <p>Shipping modern web experiences, sharpening the craft, and taking on client work.</p>
+                </div>
+            </article>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Transition Image -->
-    <section id="whitehole" class="transition-image" aria-label="Transition">
-        <img
-            class="transition-img"
-            src="imgs/black%20white%20transiotion.png"
-            alt=""
-            draggable="false"
-            loading="lazy"
-            decoding="async"
-            aria-hidden="true"
-        />
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills sectionFade" aria-label="Skills">
-        <div class="skills-inner">
-            <div class="section-header">
-                <span class="section-eyebrow">Skills</span>
-                <h2 class="section-title">Kompetenzen</h2>
-            </div>
-
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3 class="skill-card-title">Technisches & Analytisches Denken</h3>
-                    <p class="skill-card-text">
-                        Prozessoptimierung, technisches Verständnis, analytische Problemlösung.
-                    </p>
-                </div>
-
-                <div class="skill-card">
-                    <h3 class="skill-card-title">Wirtschaftliches Verständnis</h3>
-                    <p class="skill-card-text">
-                        Betriebswirtschaftliche Analyse, Kostenbewusstsein, strategische Planung.
-                    </p>
-                </div>
-
-                <div class="skill-card">
-                    <h3 class="skill-card-title">Kommunikation & Teamarbeit</h3>
-                    <p class="skill-card-text">
-                        Effektive Kommunikation zwischen Technik & Management, Teamfähigkeit.
-                    </p>
-                </div>
-
-                <div class="skill-card">
-                    <h3 class="skill-card-title">Organisation & Selbstmanagement</h3>
-                    <p class="skill-card-text">
-                        Strukturierte Arbeitsweise, Verantwortungsbewusstsein, Flexibilität.
-                    </p>
-                </div>
-            </div>
+<!-- ====================== FAQ ====================== -->
+<section class="section" id="faq">
+    <div class="container">
+        <div class="section-head" data-reveal>
+            <span class="eyebrow">FAQ</span>
+            <h2 class="h2">Good questions</h2>
         </div>
-    </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects sectionFade" aria-label="Projects">
-        <div class="projects-inner">
-            <div class="section-header">
-                <span class="section-eyebrow">Work</span>
-                <h2 class="section-title">Projects</h2>
-                <p class="section-text">A selection of my recent work</p>
-            </div>
-
-            <div class="project-grid">
-                <a 
-                    class="project-card hoverable" 
-                    href="https://bean4u.coffee" 
-                    target="_blank" 
-                    rel="noreferrer noopener"
-                    aria-label="Visit Bean4U website"
-                >
-                    <div class="project-header">
-                        <span class="project-tag">Web</span>
-                        <time class="project-year">2025</time>
-                    </div>
-                    <h3 class="project-title">bean4U</h3>
-                    <p class="project-description">
-                        Coffee recipes, clean UI, and fast pages.
-                    </p>
-                    <div class="project-tags">
-                        <span class="chip chip-dark">HTML</span>
-                        <span class="chip chip-dark">CSS</span>
-                        <span class="chip chip-dark">JS</span>
-                    </div>
-                </a>
-
-                <a 
-                    class="project-card hoverable" 
-                    href="https://github.com/999david01/portfolio.main" 
-                    target="_blank" 
-                    rel="noreferrer noopener"
-                    aria-label="View Portfolio project on GitHub"
-                >
-                    <div class="project-header">
-                        <span class="project-tag">App</span>
-                        <time class="project-year">2025</time>
-                    </div>
-                    <h3 class="project-title">Portfolio</h3>
-                    <p class="project-description">
-                        Reusable sections, smooth motion, premium look.
-                    </p>
-                    <div class="project-tags">
-                        <span class="chip chip-dark">UI</span>
-                        <span class="chip chip-dark">Motion</span>
-                        <span class="chip chip-dark">Design</span>
-                    </div>
-                </a>
-
-                <a 
-                    class="project-card hoverable" 
-                    href="https://github.com/999david01/Formula-Arch" 
-                    target="_blank" 
-                    rel="noreferrer noopener"
-                    aria-label="View Formula Arch project on GitHub"
-                >
-                    <div class="project-header">
-                        <span class="project-tag">Tool</span>
-                        <time class="project-year">2026</time>
-                    </div>
-                    <h3 class="project-title">Formula Arch</h3>
-                    <p class="project-description">
-                        An Arch linux theme made to look like F1.
-                    </p>
-                    <div class="project-tags">
-                        <span class="chip chip-dark">F1</span>
-                        <span class="chip chip-dark">Arch Linux</span>
-                        <span class="chip chip-dark">Sleek</span>
-                    </div>
-                </a>
-            </div>
-            <div class="projects-actions">
-                <a class="btn btn-cta hoverable" href="projects.html">All projects</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Banner -->
-    <section class="cta-banner sectionFade" aria-label="Call to action">
-        <div class="cta-banner-inner">
-            <p class="cta-banner-text">Available for projects and collaborations.</p>
-            <a class="btn btn-cta hoverable" href="#contact">Let's work together</a>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials sectionFade" aria-label="Testimonials">
-        <div class="testimonials-inner">
-            <div class="section-header">
-                <span class="section-eyebrow">Testimonials</span>
-                <h2 class="section-title">What people say</h2>
-                <p class="section-text">Kind words from collaborators and clients.</p>
-            </div>
-            <div class="testimonials-grid">
-                <blockquote class="testimonial-card">
-                    <p class="testimonial-quote">David delivered a clean, fast site that exactly matched the vision. Great communication and attention to detail.</p>
-                    <footer class="testimonial-footer">
-                        <cite class="testimonial-author">— Client / Collaborator</cite>
-                    </footer>
-                </blockquote>
-                <blockquote class="testimonial-card">
-                    <p class="testimonial-quote">Professional work and a pleasure to work with. Would recommend for web and UI projects.</p>
-                    <footer class="testimonial-footer">
-                        <cite class="testimonial-author">— Client / Collaborator</cite>
-                    </footer>
-                </blockquote>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="faq sectionFade" aria-label="FAQ">
-        <div class="faq-inner">
-            <div class="section-header">
-                <span class="section-eyebrow">FAQ</span>
-                <h2 class="section-title">Common questions</h2>
-            </div>
-            <dl class="faq-list">
-                <div class="faq-item">
-                    <dt class="faq-question">Are you available for new projects?</dt>
-                    <dd class="faq-answer">Yes. I'm open to freelance work, collaborations, and interesting side projects. Reach out via the contact form.</dd>
-                </div>
-                <div class="faq-item">
-                    <dt class="faq-question">What's your typical stack?</dt>
-                    <dd class="faq-answer">I work with HTML, CSS, JavaScript, TypeScript, and Java. I focus on fast, accessible front-ends and clean code.</dd>
-                </div>
-                <div class="faq-item">
-                    <dt class="faq-question">How long does a project usually take?</dt>
-                    <dd class="faq-answer">It depends on scope. Small sites or UI work can be a few days; larger projects we can estimate together after a brief.</dd>
-                </div>
-                <div class="faq-item">
-                    <dt class="faq-question">Do you work remotely?</dt>
-                    <dd class="faq-answer">Yes. I'm set up for remote collaboration and async communication.</dd>
-                </div>
-            </dl>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact sectionFade" aria-label="Contact">
-        <div class="contact-inner">
-            <div class="section-header">
-                <span class="section-eyebrow">Contact</span>
-                <h2 class="section-title">Let's build</h2>
-                <p class="section-text">
-                    Make programming great again.
-                </p>
-            </div>
-
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h3 class="contact-info-title">Reach out</h3>
-                    <p class="contact-info-text">
-                        Reach out to me if you would like to work together.
-                    </p>
-
-                    <div class="contact-links">
-                        <a 
-                            class="contact-link hoverable" 
-                            href="mailto:999david01@gmx.at"
-                            aria-label="Send email"
-                        >
-                            999david01@gmx.at
-                        </a>
-                        <a 
-                            class="contact-link hoverable"
-                            href="https://www.instagram.com/999david01"
-                            target="_blank"
-                            rel="noreferrer noopener"
-                            aria-label="Visit Instagram profile"
-                        >
-                            Instagram
-                        </a>
-                        <a 
-                            class="contact-link hoverable"
-                            href="https://github.com/999david01"
-                            target="_blank"
-                            rel="noreferrer noopener"
-                            aria-label="Visit GitHub profile"
-                        >
-                            GitHub
-                        </a>
-                    </div>
-                </div>
-
-                <form class="contact-form" id="contactForm" novalidate aria-label="Contact Form">
-                    <label class="form-field hp" aria-hidden="true">
-                        <span>Website</span>
-                        <input 
-                            type="text" 
-                            name="website"
-                            autocomplete="off" 
-                            tabindex="-1"
-                            aria-hidden="true"
-                        />
-                    </label>
-
-                    <label class="form-field">
-                        <span>Name</span>
-                        <input 
-                            class="form-input hoverable" 
-                            type="text" 
-                            name="name"
-                            placeholder="Please enter your name" 
-                            required
-                            aria-required="true"
-                        />
-                    </label>
-
-                    <label class="form-field">
-                        <span>Email</span>
-                        <input 
-                            class="form-input hoverable" 
-                            type="email" 
-                            name="email"
-                            placeholder="Please enter your email" 
-                            required
-                            aria-required="true"
-                        />
-                    </label>
-
-                    <label class="form-field">
-                        <span>Message</span>
-                        <textarea
-                            class="form-textarea hoverable"
-                            name="message"
-                            rows="5"
-                            placeholder="Tell me what you want to build..."
-                            required
-                            aria-required="true"
-                        ></textarea>
-                    </label>
-
-                    <button class="btn btn-primary send-btn hoverable" type="submit">
-                        Send
+        <div class="faq" data-faq>
+            <div class="faq__item" data-reveal style="--d:0">
+                <h3>
+                    <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-1">
+                        Are you available for new projects?
+                        <span class="faq__icon" aria-hidden="true"></span>
                     </button>
+                </h3>
+                <div class="faq__a" id="faq-1" role="region">
+                    <div><p>Yes. I take on freelance work, collaborations, and interesting side projects.
+                        The fastest way to reach me is the form below or a direct email.</p></div>
+                </div>
+            </div>
 
-                    <p class="form-note" id="formNote" aria-live="polite">
-                        &nbsp;
-                    </p>
-                </form>
+            <div class="faq__item" data-reveal style="--d:1">
+                <h3>
+                    <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-2">
+                        What's your stack?
+                        <span class="faq__icon" aria-hidden="true"></span>
+                    </button>
+                </h3>
+                <div class="faq__a" id="faq-2" role="region">
+                    <div><p>HTML, CSS and JavaScript/TypeScript on the front end, Node.js on the back,
+                        Java and Python when the problem calls for them. I favour few dependencies and
+                        fast, accessible pages over heavy frameworks.</p></div>
+                </div>
+            </div>
+
+            <div class="faq__item" data-reveal style="--d:2">
+                <h3>
+                    <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-3">
+                        How long does a project take?
+                        <span class="faq__icon" aria-hidden="true"></span>
+                    </button>
+                </h3>
+                <div class="faq__a" id="faq-3" role="region">
+                    <div><p>A landing page or focused UI job is usually a few days. Anything larger we
+                        scope together after a short brief, and I'll give you a fixed timeline before
+                        any work starts.</p></div>
+                </div>
+            </div>
+
+            <div class="faq__item" data-reveal style="--d:3">
+                <h3>
+                    <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-4">
+                        Do you work remotely?
+                        <span class="faq__icon" aria-hidden="true"></span>
+                    </button>
+                </h3>
+                <div class="faq__a" id="faq-4" role="region">
+                    <div><p>Always. I'm based in Innsbruck, Austria and set up for fully async
+                        collaboration across time zones.</p></div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="footer" aria-label="Footer">
-        <div class="footer-inner">
-            <div class="footer-copyright">
-                © <span id="year"></span> David
+<!-- ====================== CONTACT ====================== -->
+<section class="section" id="contact">
+    <div class="container">
+        <div class="section-head" data-reveal>
+            <span class="eyebrow">Contact</span>
+            <h2 class="h2">Let's build something</h2>
+            <p class="lead" style="margin-top:1rem">
+                Tell me what you have in mind. I usually reply within a day.
+            </p>
+        </div>
+
+        <div class="contact__grid">
+            <div data-reveal>
+                <div class="contact__links">
+                    <a class="contact__link" href="mailto:999david01@gmx.at">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" />
+                        </svg>
+                        Email
+                        <span class="mono">999david01@gmx.at</span>
+                    </a>
+                    <a class="contact__link" href="https://github.com/999david7" target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" />
+                        </svg>
+                        GitHub
+                        <span class="mono">@999david7</span>
+                    </a>
+                    <a class="contact__link" href="https://www.instagram.com/999david01" target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                        </svg>
+                        Instagram
+                        <span class="mono">@999david01</span>
+                    </a>
+                </div>
+
+                <div class="copy-row">
+                    <code data-copy-source>999david01@gmx.at</code>
+                    <button class="icon-btn" type="button" data-copy="999david01@gmx.at"
+                            aria-label="Copy email address">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="9" y="9" width="12" height="12" rx="2" />
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                        </svg>
+                    </button>
+                </div>
             </div>
-            <a 
-                class="footer-link hoverable" 
-                href="#top"
-                aria-label="Back to top"
-            >
-                Back to top
+
+            <form class="form" data-contact-form novalidate data-reveal="right" style="--d:1">
+                <label class="hp" aria-hidden="true">
+                    Website
+                    <input type="text" name="website" tabindex="-1" autocomplete="off" />
+                </label>
+
+                <div class="form__row">
+                    <label class="field">
+                        <span>Name</span>
+                        <input class="input" type="text" name="name" required autocomplete="name"
+                               placeholder="Your name" aria-describedby="err-name" />
+                        <em class="field__error" id="err-name" data-error-for="name"></em>
+                    </label>
+
+                    <label class="field">
+                        <span>Email</span>
+                        <input class="input" type="email" name="email" required autocomplete="email"
+                               placeholder="you@example.com" aria-describedby="err-email" />
+                        <em class="field__error" id="err-email" data-error-for="email"></em>
+                    </label>
+                </div>
+
+                <label class="field">
+                    <span>Message</span>
+                    <textarea class="textarea" name="message" required rows="6"
+                              placeholder="Tell me what you want to build…"
+                              aria-describedby="err-message"></textarea>
+                    <em class="field__error" id="err-message" data-error-for="message"></em>
+                </label>
+
+                <button class="btn btn--primary btn--block" type="submit" data-submit>
+                    <span class="btn__label">
+                        Send message
+                        <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M5 12h14M13 6l6 6-6 6" />
+                        </svg>
+                    </span>
+                </button>
+
+                <p class="form__note" data-form-note role="status" aria-live="polite"></p>
+            </form>
+        </div>
+
+        <div class="cta" data-reveal>
+            <div>
+                <h2>Prefer to just talk?</h2>
+                <p>Drop me a line and we'll figure out whether it's a fit.</p>
+            </div>
+            <a class="btn btn--primary" href="mailto:999david01@gmx.at" data-magnetic>
+                <span class="btn__label">
+                    Email me directly
+                    <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                </span>
             </a>
         </div>
-    </footer>
+    </div>
+</section>
 
-    <!-- Scripts -->
-    <script src="scripts/cursor.js"></script>
-    <script src="scripts/script.js"></script>
+</main>
+
+<!-- ====================== FOOTER ====================== -->
+<footer class="footer">
+    <div class="container footer__inner">
+        <span>© <span data-year>2026</span> David · Built from scratch</span>
+        <nav class="footer__links" aria-label="Footer">
+            <a href="#top">Top</a>
+            <a href="projects.html">Projects</a>
+            <a href="files/resume.pdf" download>Résumé</a>
+            <a href="https://github.com/999david7" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="mailto:999david01@gmx.at">Email</a>
+        </nav>
+    </div>
+</footer>
+
+<button class="icon-btn to-top" data-to-top type="button" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 20V5M6 11l6-6 6 6" />
+    </svg>
+</button>
+
+<script src="js/main.js" defer></script>
 </body>
 </html>
