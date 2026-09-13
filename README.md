@@ -42,8 +42,15 @@ imgs/               Logos and tech icons
 Everything lives in two files.
 
 **`css/style.css`** is token-driven. Colours, spacing, radii, easing and type
-are all custom properties declared once in `:root`, with a `[data-theme="light"]`
-block that overrides only what changes. To restyle the site, edit the tokens.
+are all custom properties declared once in `:root`. To restyle the site, edit
+the tokens.
+
+The page runs **light at the top and dark from the transition band down** —
+one continuous scroll, not a theme switch. `:root` holds the light palette and
+the `.dark` class re-declares the same token names; because custom properties
+inherit, everything inside a `.dark` wrapper flips with no per-component rules.
+`projects.html` and `404.html` carry `.dark` on `<body>`, since they continue
+the dark half of the home page.
 
 **`js/main.js`** is a series of self-guarding modules inside one IIFE. Each one
 looks for its own markup and returns early if it isn't there, so the same script
@@ -56,9 +63,9 @@ classes:
 | `data-split` | Splits the text into per-character spans for the hero reveal. |
 | `data-magnetic` | The element drifts toward the cursor on hover. |
 | `data-count` / `data-suffix` | Counts up to the number when scrolled into view. |
-| `data-theme-toggle` | Flips and persists the colour theme. |
 | `data-faq` | Turns the container into a single-open accordion. |
 | `data-copy="…"` | Copies the value to the clipboard, with fallback for non-HTTPS. |
+| `data-zone-sync` | Marks a fixed overlay (nav, back-to-top, cursor) that should pick up `.dark` while it floats over a dark zone. |
 | `data-filter` / `data-search` / `data-project` | Powers the projects page filtering. |
 | `data-contact-form` | Validation, submission, and graceful degradation. |
 

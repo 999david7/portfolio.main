@@ -34,46 +34,57 @@
         return Math.min(max, Math.max(min, n));
     }
 
-    /* ----------------------------------------------------------------- theme */
+    /* ------------------------------------------------------------------ zones
+       The page runs light at the top and dark past the transition band. Fixed
+       overlays (nav, back-to-top, cursor) float over both, so they carry
+       `.dark` only while they sit above a dark zone. The palette lives in CSS
+       custom properties, so toggling one class re-skins the whole element. */
 
-    (function theme() {
-        const btn = $("[data-theme-toggle]");
-        if (!btn) return;
+    (function zones() {
+        const floaters = $$("[data-zone-sync]");
+        if (!floaters.length) return;
 
-        const root = document.documentElement;
-
-        const sync = () => {
-            const next = root.dataset.theme === "light" ? "dark" : "light";
-            btn.setAttribute("aria-label", `Switch to ${next} theme`);
-            btn.setAttribute("title", `Switch to ${next} theme`);
-        };
-
-        btn.addEventListener("click", () => {
-            const next = root.dataset.theme === "light" ? "dark" : "light";
-            root.dataset.theme = next;
-            try {
-                localStorage.setItem("theme", next);
-            } catch (e) {
-                /* private mode — the toggle still works for this session */
-            }
-            sync();
+        // Only blocks in the document flow define a zone; overlays such as the
+        // drawer carry `.dark` permanently and must not count as one.
+        const zones = $$(".dark").filter((el) => {
+            if (el.hasAttribute("data-zone-sync")) return false;
+            const pos = getComputedStyle(el).position;
+            return pos !== "fixed" && pos !== "absolute";
         });
 
-        // Follow the OS only while the visitor hasn't made a choice.
-        const media = window.matchMedia("(prefers-color-scheme: light)");
-        const onSystem = (e) => {
-            let saved = null;
-            try {
-                saved = localStorage.getItem("theme");
-            } catch (err) {
-                /* ignore */
-            }
-            if (saved) return;
-            root.dataset.theme = e.matches ? "light" : "dark";
-            sync();
-        };
-        if (media.addEventListener) media.addEventListener("change", onSystem);
+        if (!zones.length) return;
 
+        const nav = $("[data-nav]");
+
+        function span(zone) {
+            let top = zone.getBoundingClientRect().top + window.scrollY;
+            let height = zone.offsetHeight;
+
+            // Flip partway through the transition band rather than at its very
+            // end, so the nav changes while the background is mid-blend.
+            const prev = zone.previousElementSibling;
+            if (prev && prev.classList.contains("transition")) {
+                const lead = prev.offsetHeight * 0.45;
+                top -= lead;
+                height += lead;
+            }
+
+            return [top, top + height];
+        }
+
+        const sync = raf(() => {
+            // Probe at the vertical middle of the nav bar.
+            const probe = window.scrollY + (nav ? nav.offsetHeight / 2 : 32);
+            const dark = zones.some((z) => {
+                const [top, bottom] = span(z);
+                return probe >= top && probe < bottom;
+            });
+
+            floaters.forEach((el) => el.classList.toggle("dark", dark));
+        });
+
+        window.addEventListener("scroll", sync, { passive: true });
+        window.addEventListener("resize", sync, { passive: true });
         sync();
     })();
 

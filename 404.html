@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Page not found — David</title>
 <meta name="description" content="That page doesn't exist." />
 <meta name="robots" content="noindex" />
-<meta name="theme-color" content="#08090c" media="(prefers-color-scheme: dark)" />
-<meta name="theme-color" content="#f6f6f8" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#08090c" />
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 
@@ -16,24 +15,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" />
 <link rel="stylesheet" href="css/style.css" />
 
-<script>
-(function () {
-    var r = document.documentElement;
-    r.classList.add("js");
-    try {
-        var saved = localStorage.getItem("theme");
-        var sys = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-        r.dataset.theme = saved === "light" || saved === "dark" ? saved : sys;
-    } catch (e) {
-        r.dataset.theme = "dark";
-    }
-})();
-</script>
+<script>document.documentElement.classList.add("js");</script>
 </head>
 
-<body>
+<body class="dark">
 <div class="grain" aria-hidden="true"></div>
-<div class="cursor" data-cursor aria-hidden="true"><i></i></div>
+<div class="cursor dark" data-cursor aria-hidden="true"><i></i></div>
 
 <main class="notfound">
     <div class="hero__bg" aria-hidden="true">

@@ -9,45 +9,59 @@
 
 /* --------------------------------------------------------------------------
    1. TOKENS
-   Dark is the default. The inline script in <head> always stamps an explicit
-   data-theme on <html>, so only two palettes ever need to exist.
+   The page runs light at the top and turns dark past the transition band —
+   one continuous scroll, no theme switch.
+
+   :root holds the light palette. Any element carrying `.dark` re-declares the
+   same token names, and because custom properties inherit, every component
+   inside it flips automatically with no per-component dark rules.
 -------------------------------------------------------------------------- */
 
 :root {
     /* Surface + ink */
-    --bg: #08090c;
-    --bg-2: #0b0d12;
-    --bg-3: #101319;
-    --surface: rgba(255, 255, 255, 0.035);
-    --surface-2: rgba(255, 255, 255, 0.06);
-    --border: rgba(255, 255, 255, 0.09);
-    --border-strong: rgba(255, 255, 255, 0.18);
-    --text: #eef1f6;
-    --text-muted: #98a1b0;
-    --text-faint: #6b7482;
+    --bg: #f6f6f8;
+    --bg-2: #ffffff;
+    --bg-3: #eeeff3;
+    --surface: rgba(255, 255, 255, 0.9);
+    --surface-2: #ffffff;
+    --border: rgba(12, 15, 22, 0.1);
+    --border-strong: rgba(12, 15, 22, 0.24);
+    --text: #0d0f14;
+    --text-muted: #59606d;
+    --text-faint: #878e9b;
 
     /* Brand */
-    --accent: #ff5d3b;
-    --accent-2: #ffa63d;
-    --accent-ink: #ff7a5c;
-    --accent-soft: rgba(255, 93, 59, 0.15);
-    --accent-line: rgba(255, 93, 59, 0.35);
+    --accent: #e8431c;
+    --accent-2: #ef8a15;
+    --accent-ink: #c9360f;
+    --accent-soft: rgba(232, 67, 28, 0.1);
+    --accent-line: rgba(232, 67, 28, 0.3);
     --gradient: linear-gradient(120deg, var(--accent), var(--accent-2));
 
     /* Status */
-    --danger: #ff7a7a;
-    --success: #4fd6a0;
+    --danger: #c62828;
+    --success: #0f7a4f;
 
-    /* Primary button skin */
-    --btn-bg: var(--gradient);
-    --btn-fg: #180704;
-    --btn-glow: 0 14px 34px -14px rgba(255, 93, 59, 0.7);
-    --btn-glow-hover: 0 22px 46px -16px rgba(255, 93, 59, 0.85);
+    /* Primary button skin. On light the fill goes ink-dark: an orange
+       gradient with white text only reaches 3:1 at its light end, failing AA.
+       The brand still shows through the glow and the shine sweep. */
+    --btn-bg: linear-gradient(135deg, #191c24, #0a0c11);
+    --btn-fg: #ffffff;
+    --btn-glow: 0 14px 30px -14px rgba(12, 15, 22, 0.55);
+    --btn-glow-hover: 0 22px 44px -16px rgba(232, 67, 28, 0.5);
 
     /* Elevation */
-    --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.28);
-    --shadow-md: 0 18px 44px -20px rgba(0, 0, 0, 0.8);
-    --shadow-lg: 0 34px 80px -32px rgba(0, 0, 0, 0.9);
+    --shadow-sm: 0 2px 10px rgba(12, 15, 22, 0.06);
+    --shadow-md: 0 18px 44px -22px rgba(12, 15, 22, 0.28);
+    --shadow-lg: 0 34px 80px -34px rgba(12, 15, 22, 0.34);
+
+    /* Card elevation only reads on light surfaces. */
+    --card-shadow: var(--shadow-sm);
+    --panel-shadow: var(--shadow-md);
+
+    /* Ambient */
+    --grain-opacity: 0.045;
+    --orb-opacity: 0.3;
 
     /* Motion */
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -77,42 +91,56 @@
     --nav-h: 72px;
     --section-pad: clamp(4.5rem, 10vw, 8.5rem);
 
-    color-scheme: dark;
+    color-scheme: light;
 }
 
-[data-theme="light"] {
-    --bg: #f6f6f8;
-    --bg-2: #ffffff;
-    --bg-3: #eeeff3;
-    --surface: rgba(255, 255, 255, 0.9);
-    --surface-2: #ffffff;
-    --border: rgba(12, 15, 22, 0.1);
-    --border-strong: rgba(12, 15, 22, 0.24);
-    --text: #0d0f14;
-    --text-muted: #59606d;
-    --text-faint: #878e9b;
+/* ---- The dark half of the page -------------------------------------------
+   Put this on any wrapper and everything inside switches. Also used on the
+   nav (toggled by JS as it passes over a dark zone) and on the sub-pages. */
 
-    --accent: #e8431c;
-    --accent-2: #ef8a15;
-    --accent-ink: #c9360f;
-    --accent-soft: rgba(232, 67, 28, 0.1);
-    --accent-line: rgba(232, 67, 28, 0.3);
+.dark {
+    --bg: #08090c;
+    --bg-2: #0b0d12;
+    --bg-3: #101319;
+    --surface: rgba(255, 255, 255, 0.035);
+    --surface-2: rgba(255, 255, 255, 0.06);
+    --border: rgba(255, 255, 255, 0.09);
+    --border-strong: rgba(255, 255, 255, 0.18);
+    --text: #eef1f6;
+    --text-muted: #98a1b0;
+    --text-faint: #6b7482;
 
-    --danger: #c62828;
-    --success: #0f7a4f;
+    --accent: #ff5d3b;
+    --accent-2: #ffa63d;
+    --accent-ink: #ff7a5c;
+    --accent-soft: rgba(255, 93, 59, 0.15);
+    --accent-line: rgba(255, 93, 59, 0.35);
 
-    /* On light, the primary button goes ink-dark: guaranteed contrast,
-       with the brand showing through the glow and the shine sweep. */
-    --btn-bg: linear-gradient(135deg, #191c24, #0a0c11);
-    --btn-fg: #ffffff;
-    --btn-glow: 0 14px 30px -14px rgba(12, 15, 22, 0.55);
-    --btn-glow-hover: 0 22px 44px -16px rgba(232, 67, 28, 0.5);
+    --danger: #ff7a7a;
+    --success: #4fd6a0;
 
-    --shadow-sm: 0 2px 10px rgba(12, 15, 22, 0.06);
-    --shadow-md: 0 18px 44px -22px rgba(12, 15, 22, 0.28);
-    --shadow-lg: 0 34px 80px -34px rgba(12, 15, 22, 0.34);
+    /* Bright fill, dark ink — 6.5:1 on the near-black ground. */
+    --btn-bg: var(--gradient);
+    --btn-fg: #180704;
+    --btn-glow: 0 14px 34px -14px rgba(255, 93, 59, 0.7);
+    --btn-glow-hover: 0 22px 46px -16px rgba(255, 93, 59, 0.85);
 
-    color-scheme: light;
+    --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.28);
+    --shadow-md: 0 18px 44px -20px rgba(0, 0, 0, 0.8);
+    --shadow-lg: 0 34px 80px -32px rgba(0, 0, 0, 0.9);
+
+    /* Drop shadows read as mud on a near-black ground. */
+    --card-shadow: none;
+    --panel-shadow: none;
+
+    --grain-opacity: 0.03;
+    --orb-opacity: 0.5;
+
+    color-scheme: dark;
+    /* background-color, not the `background` shorthand — the shorthand would
+       reset background-image on anything this class lands on. */
+    background-color: var(--bg);
+    color: var(--text);
 }
 
 /* --------------------------------------------------------------------------
@@ -199,12 +227,8 @@ select {
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    opacity: 0.03;
+    opacity: var(--grain-opacity);
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-[data-theme="light"] .grain {
-    opacity: 0.045;
 }
 
 /* Scroll progress rail */
@@ -324,6 +348,62 @@ main {
         var(--border),
         transparent
     );
+}
+
+/* ---- Light → dark transition band ----------------------------------------
+   The seam where the page turns over. A gradient carries the light half down
+   into the dark, and the artwork rides on top with its edges masked off so
+   there is no visible boundary at either end. */
+
+.transition {
+    position: relative;
+    height: clamp(16rem, 34vw, 26rem);
+    background: linear-gradient(
+        180deg,
+        #f6f6f8 0%,
+        #d9d6d6 22%,
+        #4a4143 52%,
+        #14100f 78%,
+        #08090c 100%
+    );
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.transition__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 45%;
+    /* The artwork is a near-black monochrome rose. `screen` keeps the lit
+       petals and drops the black, so it lifts out of the gradient rather
+       than stamping a rectangle onto it. */
+    mix-blend-mode: screen;
+    opacity: 0.7;
+    /* Dissolve on all four edges — vertically into the two halves of the
+       page, horizontally so the frame never shows. */
+    mask-image: linear-gradient(180deg, transparent 2%, #000 40%, #000 72%, transparent 97%),
+        linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%);
+    mask-composite: intersect;
+    -webkit-mask-image: linear-gradient(180deg, transparent 2%, #000 40%, #000 72%, transparent 97%),
+        linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%);
+    -webkit-mask-composite: source-in;
+}
+
+/* A slow drift so the seam feels alive rather than pasted in. */
+@media (prefers-reduced-motion: no-preference) {
+    .transition__img {
+        animation: seam 26s var(--ease-soft) infinite alternate;
+    }
+}
+
+@keyframes seam {
+    to {
+        scale: 1.12;
+        translate: -2% 0;
+    }
 }
 
 /* --------------------------------------------------------------------------
@@ -594,11 +674,11 @@ h4 {
 .btn--soft:hover {
     background: var(--accent);
     border-color: var(--accent);
-    color: var(--btn-fg);
+    color: #fff;
 }
 
-[data-theme="light"] .btn--soft:hover {
-    color: #fff;
+.dark .btn--soft:hover {
+    color: var(--btn-fg);
 }
 
 .btn--sm {
@@ -683,37 +763,6 @@ h4 {
     height: 1.15rem;
 }
 
-/* Theme toggle — sun and moon trade places on a rotation */
-.theme-toggle svg {
-    grid-area: 1 / 1;
-    transition: rotate 520ms var(--ease), scale 420ms var(--ease),
-        opacity 260ms var(--ease-soft);
-}
-
-.theme-toggle .icon-moon {
-    rotate: 0deg;
-    scale: 1;
-    opacity: 1;
-}
-
-.theme-toggle .icon-sun {
-    rotate: -70deg;
-    scale: 0.4;
-    opacity: 0;
-}
-
-[data-theme="light"] .theme-toggle .icon-moon {
-    rotate: 70deg;
-    scale: 0.4;
-    opacity: 0;
-}
-
-[data-theme="light"] .theme-toggle .icon-sun {
-    rotate: 0deg;
-    scale: 1;
-    opacity: 1;
-}
-
 /* Back to top */
 .to-top {
     position: fixed;
@@ -752,13 +801,10 @@ h4 {
     background: var(--surface);
     overflow: hidden;
     isolation: isolate;
+    box-shadow: var(--card-shadow);
     transition: border-color var(--t) var(--ease),
         background-color var(--t) var(--ease), box-shadow var(--t) var(--ease),
         transform var(--t) var(--ease);
-}
-
-[data-theme="light"] .card {
-    box-shadow: var(--shadow-sm);
 }
 
 .card:hover {
@@ -853,6 +899,9 @@ h4 {
    8. NAV
 -------------------------------------------------------------------------- */
 
+/* The nav floats over both halves of the page, so JS toggles `.dark` on it as
+   it crosses the transition band. The token swap crossfades because the
+   resolved colours are transitioned here. */
 .nav {
     position: fixed;
     inset: 0 0 auto 0;
@@ -860,10 +909,12 @@ h4 {
     height: var(--nav-h);
     display: flex;
     align-items: center;
+    background: transparent;
     border-bottom: 1px solid transparent;
     transition: height var(--t) var(--ease),
-        background-color var(--t) var(--ease),
-        border-color var(--t) var(--ease), backdrop-filter var(--t) var(--ease);
+        background-color var(--t-slow) var(--ease-soft),
+        color var(--t-slow) var(--ease-soft),
+        border-color var(--t-slow) var(--ease-soft);
 }
 
 .nav.is-stuck {
@@ -871,6 +922,13 @@ h4 {
     background: color-mix(in srgb, var(--bg) 78%, transparent);
     backdrop-filter: blur(16px) saturate(160%);
     -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border-bottom-color: var(--border);
+}
+
+/* Without JS the nav can't know which half it is floating over, and its dark
+   ink would vanish against the dark half. Give it an opaque bar instead. */
+html:not(.js) .nav {
+    background-color: var(--bg);
     border-bottom-color: var(--border);
 }
 
@@ -1116,7 +1174,7 @@ h4 {
     position: absolute;
     border-radius: 50%;
     filter: blur(90px);
-    opacity: 0.5;
+    opacity: var(--orb-opacity);
     will-change: transform;
 }
 
@@ -1135,7 +1193,7 @@ h4 {
     width: 30rem;
     height: 30rem;
     background: radial-gradient(circle, var(--accent-2), transparent 68%);
-    opacity: 0.35;
+    opacity: calc(var(--orb-opacity) * 0.7);
     animation: drift2 27s var(--ease-soft) infinite alternate;
 }
 
@@ -1145,20 +1203,8 @@ h4 {
     width: 26rem;
     height: 26rem;
     background: radial-gradient(circle, #6f5cff, transparent 70%);
-    opacity: 0.28;
+    opacity: calc(var(--orb-opacity) * 0.55);
     animation: drift3 31s var(--ease-soft) infinite alternate;
-}
-
-[data-theme="light"] .orb {
-    opacity: 0.3;
-}
-
-[data-theme="light"] .orb--2 {
-    opacity: 0.24;
-}
-
-[data-theme="light"] .orb--3 {
-    opacity: 0.16;
 }
 
 @keyframes drift1 {
@@ -1415,16 +1461,9 @@ h4 {
     padding: clamp(1.5rem, 3vw, 2.1rem);
     border: 1px solid var(--border);
     border-radius: var(--r-xl);
-    background: linear-gradient(
-        160deg,
-        var(--surface-2),
-        var(--surface)
-    );
+    background: linear-gradient(160deg, var(--surface-2), var(--surface));
+    box-shadow: var(--panel-shadow);
     overflow: hidden;
-}
-
-[data-theme="light"] .idcard {
-    box-shadow: var(--shadow-md);
 }
 
 .idcard::before {
@@ -1443,9 +1482,10 @@ h4 {
     animation: float 7s var(--ease-soft) infinite alternate;
 }
 
-/* The mark is near-black line art on transparency (avg. luminance 39), so it
-   disappears on the dark surface. It's greyscale, so inverting is lossless. */
-[data-theme="dark"] .idcard__logo {
+/* The mark is near-black line art on transparency, so it needs a light
+   ground. It sits in the light half of the page; invert it if it ever moves
+   into a dark zone. */
+.dark .idcard__logo {
     filter: invert(1);
 }
 
@@ -1968,10 +2008,7 @@ h4 {
     border: 1px solid var(--border);
     border-radius: var(--r-xl);
     background: var(--surface);
-}
-
-[data-theme="light"] .form {
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--panel-shadow);
 }
 
 .form__row {
@@ -2334,6 +2371,8 @@ h4 {
     margin: -17px 0 0 -17px;
     pointer-events: none;
     opacity: 0;
+    /* Only the inner ring is visible; keep `.dark` from painting a square. */
+    background-color: transparent;
     transition: opacity 260ms var(--ease);
     will-change: transform;
 }
