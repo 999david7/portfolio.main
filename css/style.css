@@ -24,11 +24,11 @@
 :root {
     /* Paper and ink. Two colours carry the whole design — every other value
        here is one of them at reduced alpha. */
-    --bg: #fcfbf8;
-    --bg-2: #fefdf9;
-    --bg-3: #f3f1eb;
-    --surface: #fefdf9;
-    --surface-2: #faf8f4;
+    --bg: #f7f3ea;
+    --bg-2: #fbf8f1;
+    --bg-3: #efe9dd;
+    --surface: #fbf8f1;
+    --surface-2: #f4efe4;
     --border: rgba(23, 20, 15, 0.13);
     --border-strong: rgba(23, 20, 15, 0.3);
     --text: #17140f;
@@ -47,7 +47,7 @@
 
     --btn-bg: #17140f;
     --btn-bg-hover: #332d22;
-    --btn-fg: #fcfbf8;
+    --btn-fg: #f7f3ea;
 
     --shadow-sm: 0 1px 2px rgba(23, 20, 15, 0.05);
     --shadow-md: 0 1px 3px rgba(23, 20, 15, 0.07), 0 6px 18px rgba(23, 20, 15, 0.05);
@@ -88,21 +88,21 @@
     --bg-3: #26211a;
     --surface: #1f1b15;
     --surface-2: #26211a;
-    --border: rgba(252, 251, 248, 0.15);
-    --border-strong: rgba(252, 251, 248, 0.32);
-    --text: #fcfbf8;
-    --text-muted: rgba(252, 251, 248, 0.72);
-    --text-faint: rgba(252, 251, 248, 0.48);
+    --border: rgba(247, 243, 234, 0.15);
+    --border-strong: rgba(247, 243, 234, 0.32);
+    --text: #f7f3ea;
+    --text-muted: rgba(247, 243, 234, 0.72);
+    --text-faint: rgba(247, 243, 234, 0.48);
 
-    --accent: #fcfbf8;
-    --accent-soft: rgba(252, 251, 248, 0.07);
-    --accent-line: rgba(252, 251, 248, 0.26);
+    --accent: #f7f3ea;
+    --accent-soft: rgba(247, 243, 234, 0.07);
+    --accent-line: rgba(247, 243, 234, 0.26);
 
     --danger: #e08a7a;
     --success: #8fbf7f;
 
-    --btn-bg: #fcfbf8;
-    --btn-bg-hover: #fffefa;
+    --btn-bg: #f7f3ea;
+    --btn-bg-hover: #fbf8f1;
     --btn-fg: #17140f;
 
     --shadow-sm: none;
@@ -325,7 +325,7 @@ h4 {
     font-size: 0.78rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--text-faint);
+    color: var(--text-muted);
 }
 
 /* Slots where .mono carries a literal value rather than a label. Addresses
@@ -984,7 +984,7 @@ h4 {
 .ticker__label {
     font-size: 0.8rem;
     font-weight: 500;
-    color: var(--text-faint);
+    color: var(--text-muted);
 }
 
 .ticker__item {
@@ -1031,8 +1031,8 @@ h4 {
     height: clamp(12rem, 24vw, 18rem);
     background: linear-gradient(
         180deg,
-        #fcfbf8 0%,
-        #ddd8cf 22%,
+        #f7f3ea 0%,
+        #d8d1c1 22%,
         #4a4137 52%,
         #201b14 78%,
         #17140f 100%
@@ -1098,7 +1098,7 @@ h4 {
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--text-faint);
+    color: var(--text-muted);
 }
 
 /* Details card */
@@ -1142,7 +1142,7 @@ h4 {
 }
 
 .idcard__rows span:first-child {
-    color: var(--text-faint);
+    color: var(--text-muted);
 }
 
 .idcard__rows span:last-child {
@@ -1248,7 +1248,7 @@ h4 {
     font-size: 0.8rem;
     font-weight: 500;
     letter-spacing: 0.16em;
-    color: var(--text-faint);
+    color: var(--text-muted);
 }
 
 .cap h3 {
@@ -1891,7 +1891,7 @@ html:not(.js) .faq__icon {
     background: var(--bg-3);
     font-family: var(--font-ui);
     font-size: 0.7rem;
-    color: var(--text-faint);
+    color: var(--text-muted);
     pointer-events: none;
     transition: opacity var(--t) var(--ease);
 }
