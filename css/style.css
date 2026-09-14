@@ -291,6 +291,14 @@ h4 {
     letter-spacing: 0.03em;
     text-transform: uppercase;
     color: var(--text);
+    /* Even out the rag rather than leaving a lone word on the last line. */
+    text-wrap: balance;
+}
+
+p,
+li,
+dd {
+    text-wrap: pretty;
 }
 
 .h1 {
@@ -1448,6 +1456,7 @@ h4 {
 }
 
 .tl__body p {
+    max-width: 62ch;
     font-size: 0.9rem;
     color: var(--text-muted);
 }
@@ -1936,8 +1945,9 @@ html:not(.js) .faq__icon {
 }
 
 .notfound__code {
+    font-family: var(--font-display);
     font-size: clamp(3.5rem, 12vw, 6rem);
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1;
     letter-spacing: -0.03em;
     color: var(--accent);
@@ -1949,6 +1959,61 @@ html:not(.js) .faq__icon {
     gap: 0.6rem;
     justify-content: center;
     margin-top: 1.75rem;
+}
+
+/* ---- Touch targets ------------------------------------------------------
+   On a coarse pointer every control needs ~44px of reachable area. Several
+   sat at 38px. Padding would change the layout, so the hit area is extended
+   with a pseudo-element instead and the visual size stays put. */
+
+@media (pointer: coarse) {
+    .icon-btn,
+    .nav__burger {
+        position: relative;
+    }
+
+    .icon-btn::after,
+    .nav__burger::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: max(100%, 44px);
+        height: max(100%, 44px);
+        transform: translate(-50%, -50%);
+    }
+
+    .input,
+    .textarea,
+    .search input {
+        min-height: 44px;
+    }
+
+    /* Short words like "Top" can't reach 44px wide without leaving absurd
+       gaps. They clear the target-size rule on spacing instead: 24px between
+       adjacent targets, with a 45px tap height. */
+    .footer__links {
+        gap: 0.6rem 1.5rem;
+    }
+
+    .footer__links a {
+        padding-block: 0.72rem;
+    }
+
+    /* Small buttons and the brand lock-up are real targets too. The inline
+       body link is deliberately left alone — WCAG exempts links in a line of
+       text, and padding one out would break the paragraph it sits in. */
+    .btn--sm {
+        --btn-h: 44px;
+    }
+
+    .nav__brand {
+        min-height: 44px;
+    }
+
+    .drawer__link {
+        padding-block: 0.85rem;
+    }
 }
 
 /* --------------------------------------------------------------------------
