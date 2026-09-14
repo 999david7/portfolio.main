@@ -25,10 +25,10 @@
     /* Paper and ink. Two colours carry the whole design — every other value
        here is one of them at reduced alpha. */
     --bg: #f7f3ea;
-    --bg-2: #fbf8f1;
-    --bg-3: #efe9dd;
-    --surface: #fbf8f1;
-    --surface-2: #f4efe4;
+    --bg-2: #f3eee2;
+    --bg-3: #e8e0cf;
+    --surface: #f2ece0;
+    --surface-2: #ece5d6;
     --border: rgba(23, 20, 15, 0.13);
     --border-strong: rgba(23, 20, 15, 0.3);
     --text: #17140f;
@@ -1651,7 +1651,7 @@ html:not(.js) .faq__icon {
     padding: 0.65rem 0.8rem;
     border: 1px solid var(--border-strong);
     border-radius: var(--r-sm);
-    background: var(--bg-2);
+    background: var(--bg);
     font-size: 0.92rem;
     transition: border-color var(--t-fast) var(--ease),
         box-shadow var(--t-fast) var(--ease);
@@ -1868,7 +1868,7 @@ html:not(.js) .faq__icon {
     padding: 0.55rem 2.2rem 0.55rem 2.2rem;
     border: 1px solid var(--border-strong);
     border-radius: var(--r-sm);
-    background: var(--bg-2);
+    background: var(--bg);
     font-size: 0.88rem;
     transition: border-color var(--t-fast) var(--ease),
         box-shadow var(--t-fast) var(--ease);
