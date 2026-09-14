@@ -1,7 +1,8 @@
 /* ==========================================================================
    PORTFOLIO — DESIGN SYSTEM
    A plain, professional layout: neutral type, squared corners, restrained
-   accent, and only the motion that helps you read the page.
+   accent, and motion that responds rather than performs — 1-3px over
+   120-380ms, transform and opacity only.
 
    1. Tokens        6. Hero            11. FAQ
    2. Base          7. About           12. Contact
@@ -56,6 +57,7 @@
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
     --t-fast: 120ms;
     --t: 200ms;
+    --t-slow: 380ms;
 
     /* Type — one neutral family throughout. */
     --font-ui: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -202,6 +204,7 @@ select {
     font-size: 0.875rem;
     font-weight: 500;
     transform: translateY(-200%);
+    transition: transform var(--t) var(--ease);
 }
 
 .skip-link:focus-visible {
@@ -336,6 +339,14 @@ h4 {
     font-size: 0.8rem;
     color: var(--text-muted);
     white-space: nowrap;
+    transition: border-color var(--t) var(--ease), color var(--t) var(--ease),
+        transform var(--t-fast) var(--ease);
+}
+
+.chip:hover {
+    border-color: var(--border-strong);
+    color: var(--text);
+    transform: translateY(-1px);
 }
 
 /* Availability marker */
@@ -349,11 +360,33 @@ h4 {
 }
 
 .pill__dot {
+    position: relative;
     width: 7px;
     height: 7px;
     border-radius: var(--r-full);
     background: var(--success);
     flex: none;
+}
+
+.pill__dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: inherit;
+    animation: dotPulse 2.8s var(--ease) infinite;
+}
+
+@keyframes dotPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.45;
+    }
+    70%,
+    100% {
+        transform: scale(2.4);
+        opacity: 0;
+    }
 }
 
 /* --------------------------------------------------------------------------
@@ -380,7 +413,17 @@ h4 {
     white-space: nowrap;
     cursor: pointer;
     transition: background-color var(--t) var(--ease),
-        border-color var(--t) var(--ease), color var(--t) var(--ease);
+        border-color var(--t) var(--ease), color var(--t) var(--ease),
+        transform var(--t-fast) var(--ease), box-shadow var(--t) var(--ease);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+    transition-duration: 60ms;
 }
 
 .btn__label {
@@ -392,6 +435,11 @@ h4 {
 .btn__arrow {
     width: 1em;
     height: 1em;
+    transition: transform var(--t) var(--ease);
+}
+
+.btn--ghost:hover .btn__arrow {
+    transform: translateY(2px);
 }
 
 /* background-color, not the `background` shorthand: the shorthand resets
@@ -489,13 +537,20 @@ h4 {
     color: var(--text-muted);
     cursor: pointer;
     transition: background-color var(--t) var(--ease),
-        border-color var(--t) var(--ease), color var(--t) var(--ease);
+        border-color var(--t) var(--ease), color var(--t) var(--ease),
+        transform var(--t-fast) var(--ease);
 }
 
 .icon-btn:hover {
     background: var(--bg-3);
     border-color: var(--border-strong);
     color: var(--text);
+    transform: translateY(-1px);
+}
+
+.icon-btn:active {
+    transform: translateY(0);
+    transition-duration: 60ms;
 }
 
 .icon-btn svg {
@@ -514,8 +569,11 @@ h4 {
     background: var(--surface);
     box-shadow: var(--shadow-md);
     opacity: 0;
+    transform: translateY(6px);
     pointer-events: none;
-    transition: opacity var(--t) var(--ease);
+    transition: opacity var(--t) var(--ease), transform var(--t) var(--ease),
+        background-color var(--t) var(--ease), border-color var(--t) var(--ease),
+        color var(--t) var(--ease);
 }
 
 .dark .to-top,
@@ -525,7 +583,18 @@ h4 {
 
 .to-top.is-shown {
     opacity: 1;
+    transform: translateY(0);
     pointer-events: auto;
+}
+
+/* Declared after .icon-btn:hover, which would otherwise be overridden by the
+   rule above and lose the lift. */
+.to-top.is-shown:hover {
+    transform: translateY(-2px);
+}
+
+.to-top.is-shown:active {
+    transform: translateY(0);
 }
 
 /* --------------------------------------------------------------------------
@@ -538,11 +607,14 @@ h4 {
     border-radius: var(--r-md);
     background: var(--surface);
     box-shadow: var(--card-shadow);
-    transition: border-color var(--t) var(--ease);
+    transition: border-color var(--t) var(--ease),
+        box-shadow var(--t) var(--ease), transform var(--t) var(--ease);
 }
 
 .card:hover {
     border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
 }
 
 /* A short fade-up as sections arrive. Applied only when JS is running, so the
@@ -609,6 +681,11 @@ h4 {
     color: #fff;
     font-size: 0.85rem;
     font-weight: 600;
+    transition: transform var(--t) var(--ease);
+}
+
+.nav__brand:hover .nav__mark {
+    transform: scale(1.08);
 }
 
 .nav__links {
@@ -625,8 +702,29 @@ h4 {
     transition: color var(--t-fast) var(--ease);
 }
 
+/* One rule draws both states: the bar grows from the left on hover at low
+   opacity, and goes solid once the section is the current one. */
+.nav__link::after {
+    content: "";
+    position: absolute;
+    left: 0.7rem;
+    right: 0.7rem;
+    bottom: -0.15rem;
+    height: 2px;
+    background: var(--accent);
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--t) var(--ease), opacity var(--t) var(--ease);
+}
+
 .nav__link:hover {
     color: var(--text);
+}
+
+.nav__link:hover::after {
+    opacity: 0.4;
+    transform: scaleX(1);
 }
 
 .nav__link.is-active {
@@ -635,13 +733,8 @@ h4 {
 }
 
 .nav__link.is-active::after {
-    content: "";
-    position: absolute;
-    left: 0.7rem;
-    right: 0.7rem;
-    bottom: -0.15rem;
-    height: 2px;
-    background: var(--accent);
+    opacity: 1;
+    transform: scaleX(1);
 }
 
 .nav__actions {
@@ -750,6 +843,16 @@ h4 {
     font-size: 0.95rem;
     font-weight: 500;
     color: var(--text);
+    opacity: 0;
+    transform: translateX(10px);
+    transition: color var(--t-fast) var(--ease),
+        opacity var(--t) var(--ease), transform var(--t) var(--ease);
+}
+
+.drawer.is-open .drawer__link {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: calc(var(--d, 0) * 35ms + 80ms);
 }
 
 .drawer__link:hover {
@@ -850,10 +953,25 @@ h4 {
     color: var(--text-muted);
 }
 
+.ticker__item {
+    transition: color var(--t) var(--ease), transform var(--t) var(--ease);
+}
+
+.ticker__item:hover {
+    color: var(--text);
+    transform: translateY(-2px);
+}
+
 .ticker__item img {
     width: 18px;
     height: 18px;
     object-fit: contain;
+    opacity: 0.75;
+    transition: opacity var(--t) var(--ease);
+}
+
+.ticker__item:hover img {
+    opacity: 1;
 }
 
 /* --------------------------------------------------------------------------
@@ -894,6 +1012,19 @@ h4 {
     -webkit-mask-image: linear-gradient(180deg, transparent 2%, #000 40%, #000 72%, transparent 97%),
         linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%);
     -webkit-mask-composite: source-in;
+}
+
+/* Long and shallow enough to register as depth rather than as movement. */
+@media (prefers-reduced-motion: no-preference) {
+    .transition__img {
+        animation: seam 40s var(--ease) infinite alternate;
+    }
+}
+
+@keyframes seam {
+    to {
+        transform: scale(1.06);
+    }
 }
 
 /* --------------------------------------------------------------------------
@@ -985,6 +1116,11 @@ h4 {
     border: 1px solid var(--border);
     border-radius: var(--r-md);
     background: var(--surface);
+    transition: border-color var(--t) var(--ease);
+}
+
+.stat:hover {
+    border-color: var(--border-strong);
 }
 
 .stat b {
@@ -1074,12 +1210,18 @@ h4 {
     align-items: center;
     gap: 0.4rem;
     font-size: 1.1rem;
+    transition: color var(--t) var(--ease);
 }
 
 .project__title svg {
     width: 0.8em;
     height: 0.8em;
     color: var(--text-faint);
+    transition: color var(--t) var(--ease), transform var(--t) var(--ease);
+}
+
+.project:hover .project__title svg {
+    transform: translate(2px, -2px);
 }
 
 .project:hover .project__title {
@@ -1173,6 +1315,18 @@ h4 {
     background: var(--accent);
 }
 
+/* The dot scales in just behind its row. Scoped to .js so the marks are
+   always there for visitors without it. */
+.js .tl::before {
+    transform: scale(0);
+    transition: transform var(--t-slow) var(--ease);
+    transition-delay: calc(var(--d, 0) * 45ms + 120ms);
+}
+
+.js .tl.is-in::before {
+    transform: scale(1);
+}
+
 .tl__year {
     grid-column: 1;
     min-width: 3rem;
@@ -1259,6 +1413,25 @@ h4 {
 
 .faq__a > div {
     overflow: hidden;
+    opacity: 0;
+    transition: opacity var(--t) var(--ease);
+}
+
+.faq__item.is-open .faq__a > div {
+    opacity: 1;
+    transition-delay: 90ms;
+}
+
+html:not(.js) .faq__a {
+    grid-template-rows: 1fr;
+}
+
+html:not(.js) .faq__a > div {
+    opacity: 1;
+}
+
+html:not(.js) .faq__icon {
+    display: none;
 }
 
 .faq__a p {
@@ -1293,11 +1466,13 @@ h4 {
     padding: 0.85rem 0;
     border-bottom: 1px solid var(--border);
     font-size: 0.9rem;
-    transition: color var(--t-fast) var(--ease);
+    transition: color var(--t-fast) var(--ease),
+        transform var(--t) var(--ease);
 }
 
 .contact__link:hover {
     color: var(--accent);
+    transform: translateX(3px);
 }
 
 .contact__link svg {
@@ -1305,6 +1480,11 @@ h4 {
     height: 1rem;
     flex: none;
     color: var(--text-faint);
+    transition: color var(--t) var(--ease);
+}
+
+.contact__link:hover svg {
+    color: var(--accent);
 }
 
 .contact__link .mono {
@@ -1469,10 +1649,31 @@ h4 {
     gap: 1.25rem;
 }
 
+.footer__links a {
+    position: relative;
+    transition: color var(--t-fast) var(--ease);
+}
+
+.footer__links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--t) var(--ease);
+}
+
 .footer__links a:hover {
     color: var(--text);
-    text-decoration: underline;
-    text-underline-offset: 3px;
+}
+
+.footer__links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 /* --------------------------------------------------------------------------
@@ -1510,7 +1711,12 @@ h4 {
     color: var(--text-muted);
     cursor: pointer;
     transition: background-color var(--t-fast) var(--ease),
-        border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+        border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease),
+        transform var(--t-fast) var(--ease);
+}
+
+.filter:active {
+    transform: scale(0.97);
 }
 
 .filter:hover {
@@ -1555,6 +1761,8 @@ h4 {
     border-radius: var(--r-sm);
     background: var(--bg-2);
     font-size: 0.88rem;
+    transition: border-color var(--t-fast) var(--ease),
+        box-shadow var(--t-fast) var(--ease);
 }
 
 .search input:focus {
@@ -1576,6 +1784,7 @@ h4 {
     font-size: 0.7rem;
     color: var(--text-faint);
     pointer-events: none;
+    transition: opacity var(--t) var(--ease);
 }
 
 .search input:focus ~ kbd,

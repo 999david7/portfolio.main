@@ -46,9 +46,14 @@ are all custom properties declared once in `:root`. To restyle the site, edit
 the tokens.
 
 The look is deliberately plain and professional: one neutral type family,
-squared corners, a restrained accent used for links, labels and figures, and
-only the motion that helps you read the page — a short fade-up as sections
-arrive, and nothing else.
+squared corners, and a restrained accent used for links, labels and figures.
+
+Motion is kept subtle and functional — it responds to you rather than
+performing. Sections fade up as they arrive; buttons, cards, chips and links
+lift or underline on hover; the nav underline grows from the left; timeline
+dots scale in behind their row. Everything moves 1–3px over 120–380ms, using
+only `transform` and `opacity`. The two standing animations are the
+availability dot and the wave on the hero button.
 
 The page runs **light at the top and dark from the transition band down** —
 one continuous scroll, not a theme switch. `:root` holds the light palette and
@@ -71,8 +76,11 @@ classes:
 | `data-filter` / `data-search` / `data-project` | Powers the projects page filtering. |
 | `data-contact-form` | Validation, submission, and graceful degradation. |
 
-`prefers-reduced-motion` is honoured everywhere: the fade-ups resolve
-immediately and scrolling becomes instant.
+`prefers-reduced-motion` is honoured everywhere: transitions and animations
+collapse, the fade-ups resolve immediately, and scrolling becomes instant.
+Nothing is hidden behind an animation that reduced motion would suppress —
+the same applies without JavaScript, where reveals, timeline dots and FAQ
+answers all render open.
 
 ## Contact form
 
