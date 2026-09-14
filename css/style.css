@@ -394,13 +394,45 @@ h4 {
     height: 1em;
 }
 
+/* background-color, not the `background` shorthand: the shorthand resets
+   background-image, which would wipe the wave on .btn--wave (and again on
+   its hover state). */
 .btn--primary {
-    background: var(--btn-bg);
+    background-color: var(--btn-bg);
     color: var(--btn-fg);
 }
 
 .btn--primary:hover {
-    background: var(--btn-bg-hover);
+    background-color: var(--btn-bg-hover);
+}
+
+/* Wave — two tiling crests scrolling across the bottom of the button at
+   different speeds and in opposite directions, so the crests drift through
+   each other instead of marching in step.
+
+   Each tile starts and ends at the same height *and the same slope*, so it
+   repeats with no seam; the animation travels a whole number of tiles per
+   layer (two left, one right), which is what makes the loop invisible. */
+.btn--wave {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='28' viewBox='0 0 110 28' preserveAspectRatio='none'%3E%3Cpath d='M0 16C13.75 8 41.25 8 55 16S96.25 24 110 16V28H0Z' fill='%23ffffff' fill-opacity='.16'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='28' viewBox='0 0 160 28' preserveAspectRatio='none'%3E%3Cpath d='M0 14C20 4 60 4 80 14S140 24 160 14V28H0Z' fill='%23ffffff' fill-opacity='.09'/%3E%3C/svg%3E");
+    background-repeat: repeat-x, repeat-x;
+    background-size: 110px 20px, 160px 26px;
+    background-position: 0 100%, 0 100%;
+    animation: btnWave 8s linear infinite;
+}
+
+/* On the dark half the primary button inverts to a near-white plate, so the
+   crests have to darken instead of lighten. */
+.dark .btn--wave {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='28' viewBox='0 0 110 28' preserveAspectRatio='none'%3E%3Cpath d='M0 16C13.75 8 41.25 8 55 16S96.25 24 110 16V28H0Z' fill='%230c0f14' fill-opacity='.14'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='28' viewBox='0 0 160 28' preserveAspectRatio='none'%3E%3Cpath d='M0 14C20 4 60 4 80 14S140 24 160 14V28H0Z' fill='%230c0f14' fill-opacity='.08'/%3E%3C/svg%3E");
+}
+
+@keyframes btnWave {
+    to {
+        background-position: -220px 100%, 160px 100%;
+    }
 }
 
 .btn--ghost {
