@@ -1672,8 +1672,11 @@ html:not(.js) .faq__icon {
    15. FOOTER
 -------------------------------------------------------------------------- */
 
+/* No margin-top here. The footer is dark but the body behind it is light, and
+   a top margin sits *outside* the footer's background — it showed as a white
+   band between the dark contact section and the dark footer. The preceding
+   section's bottom padding already provides the spacing. */
 .footer {
-    margin-top: clamp(3rem, 6vw, 4.5rem);
     padding-block: 1.75rem;
     border-top: 1px solid var(--border);
     background: var(--bg-2);
