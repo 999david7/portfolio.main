@@ -45,6 +45,11 @@ Everything lives in two files.
 are all custom properties declared once in `:root`. To restyle the site, edit
 the tokens.
 
+The look is deliberately plain and professional: one neutral type family,
+squared corners, a restrained accent used for links, labels and figures, and
+only the motion that helps you read the page — a short fade-up as sections
+arrive, and nothing else.
+
 The page runs **light at the top and dark from the transition band down** —
 one continuous scroll, not a theme switch. `:root` holds the light palette and
 the `.dark` class re-declares the same token names; because custom properties
@@ -59,18 +64,15 @@ classes:
 
 | Attribute | What it does |
 | --- | --- |
-| `data-reveal` | Fades and slides the element in on scroll. `data-reveal="left \| right \| scale"` picks a direction; `style="--d:2"` staggers it. |
-| `data-split` | Splits the text into per-character spans for the hero reveal. |
-| `data-magnetic` | The element drifts toward the cursor on hover. |
-| `data-count` / `data-suffix` | Counts up to the number when scrolled into view. |
+| `data-reveal` | Fades the element up on scroll; `style="--d:2"` staggers it. |
 | `data-faq` | Turns the container into a single-open accordion. |
 | `data-copy="…"` | Copies the value to the clipboard, with fallback for non-HTTPS. |
 | `data-zone-sync` | Marks a fixed overlay (nav, back-to-top, cursor) that should pick up `.dark` while it floats over a dark zone. |
 | `data-filter` / `data-search` / `data-project` | Powers the projects page filtering. |
 | `data-contact-form` | Validation, submission, and graceful degradation. |
 
-`prefers-reduced-motion` is honoured everywhere: animations are cut, the custom
-cursor and background orbs are hidden, and scrolling becomes instant.
+`prefers-reduced-motion` is honoured everywhere: the fade-ups resolve
+immediately and scrolling becomes instant.
 
 ## Contact form
 

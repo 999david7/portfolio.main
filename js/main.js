@@ -14,7 +14,6 @@
     const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
     const calm = () => reduceMotion.matches;
 
     /** Run fn at most once per animation frame. */
@@ -30,15 +29,11 @@
         };
     }
 
-    function clamp(n, min, max) {
-        return Math.min(max, Math.max(min, n));
-    }
-
     /* ------------------------------------------------------------------ zones
        The page runs light at the top and dark past the transition band. Fixed
-       overlays (nav, back-to-top, cursor) float over both, so they carry
-       `.dark` only while they sit above a dark zone. The palette lives in CSS
-       custom properties, so toggling one class re-skins the whole element. */
+       overlays float over both, so they carry `.dark` only while they sit
+       above a dark zone. The palette lives in CSS custom properties, so
+       toggling one class re-skins the whole element. */
 
     (function zones() {
         const floaters = $$("[data-zone-sync]");
@@ -88,23 +83,6 @@
         sync();
     })();
 
-    /* --------------------------------------------------------- scroll progress */
-
-    (function scrollProgress() {
-        const bar = $("[data-progress-bar]");
-        if (!bar) return;
-
-        const update = raf(() => {
-            const max = document.documentElement.scrollHeight - window.innerHeight;
-            const value = max > 0 ? window.scrollY / max : 0;
-            bar.style.setProperty("--progress", clamp(value, 0, 1).toFixed(4));
-        });
-
-        window.addEventListener("scroll", update, { passive: true });
-        window.addEventListener("resize", update, { passive: true });
-        update();
-    })();
-
     /* ------------------------------------------------------------------- nav */
 
     (function nav() {
@@ -112,7 +90,7 @@
         if (!bar) return;
 
         const onScroll = raf(() => {
-            bar.classList.toggle("is-stuck", window.scrollY > 24);
+            bar.classList.toggle("is-stuck", window.scrollY > 8);
         });
 
         window.addEventListener("scroll", onScroll, { passive: true });
@@ -209,7 +187,7 @@
             if (lastFocus && lastFocus.focus) lastFocus.focus();
             window.setTimeout(() => {
                 if (!panel.classList.contains("is-open")) scrim.hidden = true;
-            }, 450);
+            }, 300);
         }
 
         const isOpen = () => panel.classList.contains("is-open");
@@ -248,7 +226,7 @@
 
         // A resize past the breakpoint should not leave the page locked.
         window.addEventListener("resize", () => {
-            if (isOpen() && window.innerWidth > 860) close();
+            if (isOpen() && window.innerWidth > 820) close();
         });
     })();
 
@@ -305,7 +283,7 @@
                     if (entry.isIntersecting) show(entry.target);
                 });
             },
-            { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
+            { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
         );
 
         pending.forEach((el) => observer.observe(el));
@@ -320,7 +298,7 @@
         const sweep = raf(() => {
             pending = pending.filter((el) => {
                 if (el.classList.contains("is-in")) return false;
-                if (el.getBoundingClientRect().top < window.innerHeight - 60) {
+                if (el.getBoundingClientRect().top < window.innerHeight - 40) {
                     show(el);
                     return false;
                 }
@@ -336,228 +314,6 @@
         window.addEventListener("scroll", sweep, { passive: true });
         window.addEventListener("resize", sweep, { passive: true });
         sweep();
-    })();
-
-    /* ------------------------------------------------------------- split text */
-
-    (function splitText() {
-        const nodes = $$("[data-split]");
-        if (!nodes.length) return;
-
-        nodes.forEach((node) => {
-            const text = node.textContent.trim();
-            node.setAttribute("aria-label", text);
-
-            if (calm()) return;
-
-            const frag = document.createDocumentFragment();
-            let index = 0;
-
-            text.split(/\s+/).forEach((word, w, all) => {
-                const wordEl = document.createElement("span");
-                wordEl.className = "split__word";
-                wordEl.setAttribute("aria-hidden", "true");
-
-                Array.from(word).forEach((char) => {
-                    const outer = document.createElement("span");
-                    outer.className = "split__char";
-                    outer.style.setProperty("--i", String(index++));
-
-                    const inner = document.createElement("span");
-                    inner.textContent = char;
-
-                    outer.appendChild(inner);
-                    wordEl.appendChild(outer);
-                });
-
-                frag.appendChild(wordEl);
-                if (w < all.length - 1) frag.appendChild(document.createTextNode(" "));
-            });
-
-            node.textContent = "";
-            node.appendChild(frag);
-        });
-    })();
-
-    /* --------------------------------------------------------------- counters */
-
-    (function counters() {
-        const nodes = $$("[data-count]");
-        if (!nodes.length) return;
-
-        if (calm() || !("IntersectionObserver" in window)) return;
-
-        const run = (el) => {
-            const target = Number(el.dataset.count);
-            const suffix = el.dataset.suffix || "";
-            if (!Number.isFinite(target)) return;
-
-            const duration = 1100;
-            const start = performance.now();
-
-            const tick = (now) => {
-                const p = clamp((now - start) / duration, 0, 1);
-                // easeOutExpo
-                const eased = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
-                el.textContent = Math.round(target * eased) + suffix;
-                if (p < 1) requestAnimationFrame(tick);
-            };
-
-            el.textContent = "0" + suffix;
-            requestAnimationFrame(tick);
-        };
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (!entry.isIntersecting) return;
-                    run(entry.target);
-                    observer.unobserve(entry.target);
-                });
-            },
-            { threshold: 0.6 }
-        );
-
-        nodes.forEach((el) => observer.observe(el));
-    })();
-
-    /* ------------------------------------------------------- magnetic buttons */
-
-    (function magnetic() {
-        if (calm() || !finePointer.matches) return;
-
-        const strength = 0.32;
-        const radius = 70;
-
-        $$("[data-magnetic]").forEach((el) => {
-            const move = (e) => {
-                const r = el.getBoundingClientRect();
-                const dx = e.clientX - (r.left + r.width / 2);
-                const dy = e.clientY - (r.top + r.height / 2);
-                el.style.setProperty(
-                    "--tx",
-                    clamp(dx * strength, -radius, radius).toFixed(2) + "px"
-                );
-                el.style.setProperty(
-                    "--ty",
-                    clamp(dy * strength, -radius, radius).toFixed(2) + "px"
-                );
-            };
-
-            const reset = () => {
-                el.style.setProperty("--tx", "0px");
-                el.style.setProperty("--ty", "0px");
-            };
-
-            el.addEventListener("pointermove", move);
-            el.addEventListener("pointerleave", reset);
-            el.addEventListener("blur", reset);
-        });
-    })();
-
-    /* ----------------------------------------------------------------- ripple */
-
-    (function ripple() {
-        document.addEventListener("pointerdown", (e) => {
-            const btn = e.target.closest(".btn, .icon-btn, .filter");
-            if (!btn || btn.hasAttribute("disabled")) return;
-            if (calm()) return;
-
-            const r = btn.getBoundingClientRect();
-            const x = e.clientX - r.left;
-            const y = e.clientY - r.top;
-            // Reach the furthest corner from the click point.
-            const size =
-                2 *
-                Math.max(
-                    Math.hypot(x, y),
-                    Math.hypot(r.width - x, y),
-                    Math.hypot(x, r.height - y),
-                    Math.hypot(r.width - x, r.height - y)
-                );
-
-            const dot = document.createElement("span");
-            dot.className = "ripple";
-            dot.style.width = dot.style.height = size + "px";
-            dot.style.left = x + "px";
-            dot.style.top = y + "px";
-
-            btn.appendChild(dot);
-            dot.addEventListener("animationend", () => dot.remove());
-        });
-    })();
-
-    /* ------------------------------------------------------- spotlight + tilt */
-
-    (function cards() {
-        const spots = $$(".card--spot");
-        const tilts = $$(".card--tilt");
-
-        spots.forEach((card) => {
-            card.addEventListener("pointermove", (e) => {
-                const r = card.getBoundingClientRect();
-                card.style.setProperty("--mx", ((e.clientX - r.left) / r.width) * 100 + "%");
-                card.style.setProperty("--my", ((e.clientY - r.top) / r.height) * 100 + "%");
-            });
-        });
-
-        if (calm() || !finePointer.matches) return;
-
-        const maxTilt = 5;
-
-        tilts.forEach((card) => {
-            card.addEventListener("pointermove", (e) => {
-                const r = card.getBoundingClientRect();
-                const px = (e.clientX - r.left) / r.width - 0.5;
-                const py = (e.clientY - r.top) / r.height - 0.5;
-                card.style.setProperty("--ry", (px * maxTilt * 2).toFixed(2) + "deg");
-                card.style.setProperty("--rx", (-py * maxTilt * 2).toFixed(2) + "deg");
-            });
-
-            card.addEventListener("pointerleave", () => {
-                card.style.setProperty("--rx", "0deg");
-                card.style.setProperty("--ry", "0deg");
-            });
-        });
-    })();
-
-    /* ------------------------------------------------------- timeline progress */
-
-    (function timeline() {
-        const track = $("[data-timeline]");
-        const bar = $("[data-timeline-progress]");
-        if (!track || !bar) return;
-
-        const update = raf(() => {
-            const r = track.getBoundingClientRect();
-            const anchor = window.innerHeight * 0.62;
-            const value = (anchor - r.top) / r.height;
-            bar.style.setProperty("--progress", clamp(value, 0, 1).toFixed(4));
-        });
-
-        window.addEventListener("scroll", update, { passive: true });
-        window.addEventListener("resize", update, { passive: true });
-        update();
-
-        // Light up each dot as its card arrives. This state toggles both ways,
-        // so it must not reuse `is-in` — that class belongs to the reveal
-        // system, which only ever adds it.
-        const items = $$("[data-tl]", track);
-        if (!items.length || !("IntersectionObserver" in window)) {
-            items.forEach((el) => el.classList.add("is-lit"));
-            return;
-        }
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    entry.target.classList.toggle("is-lit", entry.isIntersecting);
-                });
-            },
-            { rootMargin: "-25% 0px -35% 0px", threshold: 0 }
-        );
-
-        items.forEach((el) => observer.observe(el));
     })();
 
     /* -------------------------------------------------------------------- faq */
@@ -624,12 +380,10 @@
                     "aria-label",
                     ok ? "Email copied" : "Copy failed — select the address manually"
                 );
-                if (ok) btn.style.color = "var(--success)";
 
                 window.clearTimeout(timer);
                 timer = window.setTimeout(() => {
                     btn.innerHTML = original;
-                    btn.style.color = "";
                     btn.setAttribute("aria-label", "Copy email address");
                 }, 2000);
             });
@@ -801,66 +555,6 @@
         });
     })();
 
-    /* ---------------------------------------------------------------- cursor */
-
-    (function cursor() {
-        const ring = $("[data-cursor]");
-        if (!ring || calm() || !finePointer.matches) return;
-
-        let x = window.innerWidth / 2;
-        let y = window.innerHeight / 2;
-        let rx = x;
-        let ry = y;
-        let running = false;
-
-        const HOVERABLE =
-            "a, button, .card, .chip, input, textarea, select, summary, [role='button']";
-
-        function loop() {
-            rx += (x - rx) * 0.18;
-            ry += (y - ry) * 0.18;
-            ring.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
-            if (running) requestAnimationFrame(loop);
-        }
-
-        document.addEventListener(
-            "pointermove",
-            (e) => {
-                if (e.pointerType !== "mouse") return;
-                x = e.clientX;
-                y = e.clientY;
-                if (!running) {
-                    running = true;
-                    rx = x;
-                    ry = y;
-                    ring.classList.add("is-on");
-                    requestAnimationFrame(loop);
-                }
-            },
-            { passive: true }
-        );
-
-        document.addEventListener("pointerover", (e) => {
-            if (e.target.closest && e.target.closest(HOVERABLE)) {
-                ring.classList.add("is-hover");
-            }
-        });
-
-        document.addEventListener("pointerout", (e) => {
-            if (e.target.closest && e.target.closest(HOVERABLE)) {
-                ring.classList.remove("is-hover");
-            }
-        });
-
-        document.addEventListener("pointerdown", () => ring.classList.add("is-down"));
-        document.addEventListener("pointerup", () => ring.classList.remove("is-down"));
-
-        document.addEventListener("mouseleave", () => ring.classList.remove("is-on"));
-        document.addEventListener("mouseenter", () => {
-            if (running) ring.classList.add("is-on");
-        });
-    })();
-
     /* ------------------------------------------------------------ projects page */
 
     (function projectFilters() {
@@ -940,7 +634,7 @@
                 if (e.key === "/" && !typing) {
                     e.preventDefault();
                     search.focus();
-                } else if (e.key === "Escape" && document.activeElement === search) {
+                } else if (e.key === "Escape" && active === search) {
                     search.value = "";
                     query = "";
                     apply();

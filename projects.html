@@ -16,7 +16,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" />
 <link rel="stylesheet" href="css/style.css" />
 
 <script>document.documentElement.classList.add("js");</script>
@@ -24,9 +24,6 @@
 
 <body class="dark">
 <a class="skip-link" href="#main">Skip to content</a>
-<div class="grain" aria-hidden="true"></div>
-<div class="scroll-progress" aria-hidden="true"><span data-progress-bar></span></div>
-<div class="cursor dark" data-cursor aria-hidden="true"><i></i></div>
 
 <header class="nav is-stuck dark" data-nav>
     <div class="nav__inner container">
@@ -44,14 +41,8 @@
 
         <div class="nav__actions">
 
-            <a class="btn btn--sm btn--primary nav__cta" href="index.html#contact" data-magnetic>
-                <span class="btn__label">
-                    Hire me
-                    <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
-                </span>
+            <a class="btn btn--sm btn--primary nav__cta" href="index.html#contact">
+<span class="btn__label">Hire me</span>
             </a>
 
             <button class="nav__burger" data-drawer-open type="button"
@@ -74,11 +65,11 @@
     </div>
 
     <nav class="drawer__links" aria-label="Mobile">
-        <a class="drawer__link" href="index.html"          style="--d:0"><span class="mono">01</span> Home</a>
-        <a class="drawer__link" href="index.html#about"    style="--d:1"><span class="mono">02</span> About</a>
-        <a class="drawer__link" href="projects.html"       style="--d:2"><span class="mono">03</span> Projects</a>
-        <a class="drawer__link" href="index.html#journey"  style="--d:3"><span class="mono">04</span> Journey</a>
-        <a class="drawer__link" href="index.html#contact"  style="--d:4"><span class="mono">05</span> Contact</a>
+        <a class="drawer__link" href="index.html"          style="--d:0">Home</a>
+        <a class="drawer__link" href="index.html#about"    style="--d:1">About</a>
+        <a class="drawer__link" href="projects.html"       style="--d:2">Projects</a>
+        <a class="drawer__link" href="index.html#journey"  style="--d:3">Journey</a>
+        <a class="drawer__link" href="index.html#contact"  style="--d:4">Contact</a>
     </nav>
 
     <div class="drawer__foot">
@@ -138,7 +129,7 @@
 
         <div class="work__grid" data-projects>
 
-            <a class="card card--spot card--tilt project" data-project data-category="web"
+            <a class="card project" data-project data-category="web"
                data-search="bean4u coffee recipes web html css javascript brand"
                data-reveal href="https://bean4u.coffee" target="_blank" rel="noopener noreferrer">
                 <div class="project__top">
@@ -147,7 +138,7 @@
                 </div>
                 <h3 class="project__title">
                     bean4U
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M7 17 17 7M8 7h9v9" /></svg>
                 </h3>
@@ -159,7 +150,7 @@
                 </div>
             </a>
 
-            <a class="card card--spot card--tilt project" data-project data-category="app"
+            <a class="card project" data-project data-category="app"
                data-search="portfolio website node express motion design animation"
                data-reveal href="https://github.com/999david7/portfolio.main"
                target="_blank" rel="noopener noreferrer">
@@ -169,7 +160,7 @@
                 </div>
                 <h3 class="project__title">
                     This portfolio
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M7 17 17 7M8 7h9v9" /></svg>
                 </h3>
@@ -181,7 +172,7 @@
                 </div>
             </a>
 
-            <a class="card card--spot card--tilt project" data-project data-category="tool"
+            <a class="card project" data-project data-category="tool"
                data-search="formula arch linux f1 theme ricing shell rice desktop"
                data-reveal href="https://github.com/999david7/Formula-Arch"
                target="_blank" rel="noopener noreferrer">
@@ -191,7 +182,7 @@
                 </div>
                 <h3 class="project__title">
                     Formula Arch
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M7 17 17 7M8 7h9v9" /></svg>
                 </h3>
@@ -203,7 +194,7 @@
                 </div>
             </a>
 
-            <a class="card card--spot card--tilt project" data-project data-category="design"
+            <a class="card project" data-project data-category="design"
                data-search="bean4u brand identity logo design visual system"
                data-reveal href="https://bean4u.coffee" target="_blank" rel="noopener noreferrer">
                 <div class="project__top">
@@ -212,7 +203,7 @@
                 </div>
                 <h3 class="project__title">
                     bean4U identity
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M7 17 17 7M8 7h9v9" /></svg>
                 </h3>
@@ -224,7 +215,7 @@
                 </div>
             </a>
 
-            <a class="card card--spot card--tilt project" data-project data-category="tool"
+            <a class="card project" data-project data-category="tool"
                data-search="contact api node express nodemailer backend form rate limit"
                data-reveal href="https://github.com/999david7/portfolio.main/blob/main/server.js"
                target="_blank" rel="noopener noreferrer">
@@ -234,7 +225,7 @@
                 </div>
                 <h3 class="project__title">
                     Contact API
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M7 17 17 7M8 7h9v9" /></svg>
                 </h3>
@@ -246,7 +237,7 @@
                 </div>
             </a>
 
-            <a class="card card--spot card--tilt project" data-project data-category="web"
+            <a class="card project" data-project data-category="web"
                data-search="java learning school htl anichstrasse coursework oop"
                data-reveal href="https://github.com/999david7" target="_blank" rel="noopener noreferrer">
                 <div class="project__top">
@@ -255,7 +246,7 @@
                 </div>
                 <h3 class="project__title">
                     Coursework &amp; experiments
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M7 17 17 7M8 7h9v9" /></svg>
                 </h3>
@@ -282,11 +273,11 @@
                 <h2>Want something like this?</h2>
                 <p>I'm taking on new projects right now.</p>
             </div>
-            <a class="btn btn--primary" href="index.html#contact" data-magnetic>
+            <a class="btn btn--primary" href="index.html#contact">
                 <span class="btn__label">
                     Get in touch
                     <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M5 12h14M13 6l6 6-6 6" />
                     </svg>
                 </span>
@@ -311,7 +302,7 @@
 </footer>
 
 <button class="icon-btn to-top dark" data-to-top type="button" aria-label="Back to top">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M12 20V5M6 11l6-6 6 6" />
     </svg>

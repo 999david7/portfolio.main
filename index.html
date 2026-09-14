@@ -6,7 +6,7 @@
 <title>David — Developer &amp; Designer</title>
 <meta name="description" content="David — developer and designer building fast, clean web experiences. Founder of bean4U. Available for freelance projects and collaborations." />
 <meta name="author" content="David" />
-<meta name="theme-color" content="#f6f6f8" />
+<meta name="theme-color" content="#f7f7f8" />
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="David — Developer &amp; Designer" />
@@ -20,7 +20,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" />
 <link rel="stylesheet" href="css/style.css" />
 
 <!-- Flag JS before first paint so scroll reveals never hide content from
@@ -45,9 +45,6 @@
 
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<div class="grain" aria-hidden="true"></div>
-<div class="scroll-progress" aria-hidden="true"><span data-progress-bar></span></div>
-<div class="cursor" data-cursor data-zone-sync aria-hidden="true"><i></i></div>
 
 <!-- ====================== NAV ====================== -->
 <header class="nav" data-nav data-zone-sync>
@@ -67,14 +64,8 @@
 
         <div class="nav__actions">
 
-            <a class="btn btn--sm btn--primary nav__cta" href="#contact" data-magnetic>
-                <span class="btn__label">
-                    Hire me
-                    <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
-                </span>
+            <a class="btn btn--sm btn--primary nav__cta" href="#contact">
+<span class="btn__label">Hire me</span>
             </a>
 
             <button class="nav__burger" data-drawer-open type="button"
@@ -97,11 +88,11 @@
     </div>
 
     <nav class="drawer__links" aria-label="Mobile">
-        <a class="drawer__link" href="#about"   style="--d:0"><span class="mono">01</span> About</a>
-        <a class="drawer__link" href="#work"    style="--d:1"><span class="mono">02</span> Work</a>
-        <a class="drawer__link" href="#journey" style="--d:2"><span class="mono">03</span> Journey</a>
-        <a class="drawer__link" href="#faq"     style="--d:3"><span class="mono">04</span> FAQ</a>
-        <a class="drawer__link" href="#contact" style="--d:4"><span class="mono">05</span> Contact</a>
+        <a class="drawer__link" href="#about"   style="--d:0">About</a>
+        <a class="drawer__link" href="#work"    style="--d:1">Work</a>
+        <a class="drawer__link" href="#journey" style="--d:2">Journey</a>
+        <a class="drawer__link" href="#faq"     style="--d:3">FAQ</a>
+        <a class="drawer__link" href="#contact" style="--d:4">Contact</a>
     </nav>
 
     <div class="drawer__foot">
@@ -116,78 +107,53 @@
 
 <!-- ====================== HERO ====================== -->
 <section class="hero" id="top">
-    <div class="hero__bg" aria-hidden="true">
-        <span class="orb orb--1"></span>
-        <span class="orb orb--2"></span>
-        <span class="orb orb--3"></span>
-        <div class="hero__grid"></div>
-    </div>
-
-    <div class="container hero__inner">
+    <div class="container">
         <p class="pill" data-reveal><span class="pill__dot"></span> Available for new projects</p>
 
-        <h1 class="hero__title" data-split>Building digital experiences</h1>
+        <p class="hero__role" data-reveal style="--d:1">Web Developer &amp; Designer</p>
+        <h1 class="hero__title" data-reveal style="--d:2">Building fast, clean digital experiences.</h1>
 
-        <p class="hero__sub" data-reveal style="--d:1">
-            I'm David — a developer and designer from Austria. I build interfaces that
-            are fast, clean, and actually work. Founder of
-            <a href="https://bean4u.coffee" target="_blank" rel="noopener noreferrer"
-               style="color:var(--accent-ink)">bean4U</a>.
+        <p class="hero__sub" data-reveal style="--d:3">
+            I'm David, a developer and designer based in Innsbruck, Austria. I build
+            websites and interfaces that load quickly, read clearly, and do the job
+            they were built for. Founder of
+            <a class="link" href="https://bean4u.coffee" target="_blank" rel="noopener noreferrer">bean4U</a>.
         </p>
 
-        <div class="hero__actions" data-reveal style="--d:2">
-            <a class="btn btn--primary btn--lg" href="#work" data-magnetic>
-                <span class="btn__label">
-                    See my work
-                    <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
-                </span>
+        <div class="hero__actions" data-reveal style="--d:4">
+            <a class="btn btn--primary btn--lg" href="#work">
+                <span class="btn__label">View my work</span>
             </a>
-            <a class="btn btn--ghost btn--lg btn--down" href="files/resume.pdf" download data-magnetic>
+            <a class="btn btn--ghost btn--lg" href="files/resume.pdf" download>
                 <span class="btn__label">
-                    Download résumé
+                    Download CV
                     <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M12 4v12M6 12l6 6 6-6M4 20h16" />
                     </svg>
                 </span>
             </a>
         </div>
 
-        <ul class="hero__meta" data-reveal style="--d:3">
-            <li><b data-count="2" data-suffix="+">2+</b><span class="mono">Years building</span></li>
-            <li><b data-count="12" data-suffix="+">12+</b><span class="mono">Projects shipped</span></li>
-            <li><b>Innsbruck</b><span class="mono">Austria · Remote</span></li>
+        <ul class="hero__meta" data-reveal style="--d:5">
+            <li><b>2+</b><span class="mono">Years building</span></li>
+            <li><b>12+</b><span class="mono">Projects shipped</span></li>
+            <li><b>Innsbruck, AT</b><span class="mono">Available remotely</span></li>
         </ul>
     </div>
-
-    <a class="hero__scroll" href="#about" aria-label="Scroll to about">
-        <span>Scroll</span>
-        <i aria-hidden="true"></i>
-    </a>
 </section>
 
-<!-- ====================== TICKER ====================== -->
-<div class="ticker" aria-hidden="true">
-    <div class="ticker__track" data-ticker>
-        <span class="ticker__item"><img src="imgs/icons/js.png" alt="" width="22" height="22" />JavaScript</span>
-        <span class="ticker__dot"></span>
-        <span class="ticker__item"><img src="imgs/icons/ts.png" alt="" width="22" height="22" />TypeScript</span>
-        <span class="ticker__dot"></span>
-        <span class="ticker__item"><img src="imgs/icons/html.png" alt="" width="22" height="22" />HTML</span>
-        <span class="ticker__dot"></span>
-        <span class="ticker__item"><img src="imgs/icons/css.png" alt="" width="22" height="22" />CSS</span>
-        <span class="ticker__dot"></span>
-        <span class="ticker__item"><img src="imgs/icons/java.png" alt="" width="22" height="22" />Java</span>
-        <span class="ticker__dot"></span>
-        <span class="ticker__item"><img src="imgs/icons/python.png" alt="" width="22" height="22" />Python</span>
-        <span class="ticker__dot"></span>
-        <span class="ticker__item"><img src="imgs/icons/linux.png" alt="" width="22" height="22" />Linux</span>
-        <span class="ticker__dot"></span>
-        <span class="ticker__item"><img src="imgs/icons/chatgpt.png" alt="" width="22" height="22" />AI tooling</span>
-        <span class="ticker__dot"></span>
+<!-- ====================== TECH STRIP ====================== -->
+<div class="ticker">
+    <div class="container ticker__track">
+        <span class="ticker__label">Working with</span>
+        <span class="ticker__item"><img src="imgs/icons/js.png" alt="" width="18" height="18" loading="lazy" decoding="async" />JavaScript</span>
+        <span class="ticker__item"><img src="imgs/icons/ts.png" alt="" width="18" height="18" loading="lazy" decoding="async" />TypeScript</span>
+        <span class="ticker__item"><img src="imgs/icons/html.png" alt="" width="18" height="18" loading="lazy" decoding="async" />HTML</span>
+        <span class="ticker__item"><img src="imgs/icons/css.png" alt="" width="18" height="18" loading="lazy" decoding="async" />CSS</span>
+        <span class="ticker__item"><img src="imgs/icons/java.png" alt="" width="18" height="18" loading="lazy" decoding="async" />Java</span>
+        <span class="ticker__item"><img src="imgs/icons/python.png" alt="" width="18" height="18" loading="lazy" decoding="async" />Python</span>
+        <span class="ticker__item"><img src="imgs/icons/linux.png" alt="" width="18" height="18" loading="lazy" decoding="async" />Linux</span>
     </div>
 </div>
 
@@ -196,7 +162,7 @@
     <div class="container">
         <div class="section-head" data-reveal>
             <span class="eyebrow">About</span>
-            <h2 class="h2">Your mentality<br />is your limit.</h2>
+            <h2 class="h2">Your mentality is your limit.</h2>
         </div>
 
         <div class="about__grid">
@@ -246,29 +212,29 @@
         </div>
 
         <div class="stats" data-reveal>
-            <div class="stat"><b data-count="2" data-suffix="+">2+</b><span>Years building</span></div>
-            <div class="stat"><b data-count="12" data-suffix="+">12+</b><span>Projects shipped</span></div>
-            <div class="stat"><b data-count="100" data-suffix="%">100%</b><span>Hand-written code</span></div>
+            <div class="stat"><b>2+</b><span>Years building</span></div>
+            <div class="stat"><b>12+</b><span>Projects shipped</span></div>
+            <div class="stat"><b>100%</b><span>Hand-written code</span></div>
             <div class="stat"><b>A+</b><span>Taste</span></div>
         </div>
 
         <div class="caps">
-            <article class="card card--spot cap" data-reveal style="--d:0">
+            <article class="card cap" data-reveal style="--d:0">
                 <span class="cap__num">01</span>
                 <h3>Technical &amp; analytical</h3>
                 <p>Process optimisation, solid technical grounding, and structured problem solving.</p>
             </article>
-            <article class="card card--spot cap" data-reveal style="--d:1">
+            <article class="card cap" data-reveal style="--d:1">
                 <span class="cap__num">02</span>
                 <h3>Business sense</h3>
                 <p>Cost awareness and strategic planning — I build things that make sense commercially.</p>
             </article>
-            <article class="card card--spot cap" data-reveal style="--d:2">
+            <article class="card cap" data-reveal style="--d:2">
                 <span class="cap__num">03</span>
                 <h3>Communication</h3>
                 <p>Translating cleanly between engineering and management. No jargon walls.</p>
             </article>
-            <article class="card card--spot cap" data-reveal style="--d:3">
+            <article class="card cap" data-reveal style="--d:3">
                 <span class="cap__num">04</span>
                 <h3>Self-management</h3>
                 <p>Structured, reliable, flexible. I ship on the timeline I commit to.</p>
@@ -298,7 +264,7 @@
         </div>
 
         <div class="work__grid">
-            <a class="card card--spot card--tilt project" data-reveal style="--d:0"
+            <a class="card project" data-reveal style="--d:0"
                href="https://bean4u.coffee" target="_blank" rel="noopener noreferrer">
                 <div class="project__top">
                     <span class="project__tag">Web</span>
@@ -306,7 +272,7 @@
                 </div>
                 <h3 class="project__title">
                     bean4U
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M7 17 17 7M8 7h9v9" />
                     </svg>
@@ -319,7 +285,7 @@
                 </div>
             </a>
 
-            <a class="card card--spot card--tilt project" data-reveal style="--d:1"
+            <a class="card project" data-reveal style="--d:1"
                href="https://github.com/999david7/portfolio.main" target="_blank" rel="noopener noreferrer">
                 <div class="project__top">
                     <span class="project__tag">App</span>
@@ -327,7 +293,7 @@
                 </div>
                 <h3 class="project__title">
                     This portfolio
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M7 17 17 7M8 7h9v9" />
                     </svg>
@@ -340,7 +306,7 @@
                 </div>
             </a>
 
-            <a class="card card--spot card--tilt project" data-reveal style="--d:2"
+            <a class="card project" data-reveal style="--d:2"
                href="https://github.com/999david7/Formula-Arch" target="_blank" rel="noopener noreferrer">
                 <div class="project__top">
                     <span class="project__tag">Tool</span>
@@ -348,7 +314,7 @@
                 </div>
                 <h3 class="project__title">
                     Formula Arch
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M7 17 17 7M8 7h9v9" />
                     </svg>
@@ -363,11 +329,11 @@
         </div>
 
         <div class="work__more" data-reveal>
-            <a class="btn btn--ghost" href="projects.html" data-magnetic>
+            <a class="btn btn--ghost" href="projects.html">
                 <span class="btn__label">
                     All projects
                     <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M5 12h14M13 6l6 6-6 6" />
                     </svg>
                 </span>
@@ -384,54 +350,39 @@
             <h2 class="h2">How I got here</h2>
         </div>
 
-        <div class="timeline" data-timeline>
-            <span class="timeline__progress" data-timeline-progress aria-hidden="true"></span>
-
-            <article class="card tl" data-reveal="left" data-tl style="--d:0">
-                <span class="tl__icon" aria-hidden="true">
-                    <!-- Inline glyph rather than the 2.2 MB startup screenshot,
-                         which was illegible at this size. -->
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
-                         stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z" />
-                        <path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17" />
-                        <path d="M8 3v2.5M12 2.5V5M16 3v2.5" />
-                    </svg>
-                </span>
+        <ol class="timeline">
+            <li class="tl" data-reveal style="--d:0">
                 <span class="tl__year">2024</span>
                 <div class="tl__body">
                     <h3>Started bean4U</h3>
                     <p>Launched my own coffee recipe website — my first real product, brand and all.</p>
                 </div>
-            </article>
+            </li>
 
-            <article class="card tl" data-reveal="left" data-tl style="--d:1">
-                <span class="tl__icon"><img src="imgs/htl-anichstrasse-logo.svg" alt="" width="40" height="40" loading="lazy" decoding="async" /></span>
+            <li class="tl" data-reveal style="--d:1">
                 <span class="tl__year">2025</span>
                 <div class="tl__body">
-                    <h3>HTL Anichstraße</h3>
+                    <h3>HTL Anichstra&szlig;e</h3>
                     <p>Began at the technical college in Innsbruck, going deep on engineering fundamentals.</p>
                 </div>
-            </article>
+            </li>
 
-            <article class="card tl" data-reveal="left" data-tl style="--d:2">
-                <span class="tl__icon"><img src="imgs/java.webp" alt="" width="40" height="40" loading="lazy" decoding="async" /></span>
+            <li class="tl" data-reveal style="--d:2">
                 <span class="tl__year">2025</span>
                 <div class="tl__body">
                     <h3>Picked up Java</h3>
                     <p>Moved past scripting into typed, structured, object-oriented work.</p>
                 </div>
-            </article>
+            </li>
 
-            <article class="card tl" data-reveal="left" data-tl style="--d:3">
-                <span class="tl__icon"><img src="imgs/icons/js.png" alt="" width="40" height="40" loading="lazy" decoding="async" /></span>
+            <li class="tl" data-reveal style="--d:3">
                 <span class="tl__year">Now</span>
                 <div class="tl__body">
                     <h3>Building &amp; freelancing</h3>
                     <p>Shipping modern web experiences, sharpening the craft, and taking on client work.</p>
                 </div>
-            </article>
-        </div>
+            </li>
+        </ol>
     </div>
 </section>
 
@@ -588,7 +539,7 @@
                     <span class="btn__label">
                         Send message
                         <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                             stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M5 12h14M13 6l6 6-6 6" />
                         </svg>
                     </span>
@@ -603,11 +554,11 @@
                 <h2>Prefer to just talk?</h2>
                 <p>Drop me a line and we'll figure out whether it's a fit.</p>
             </div>
-            <a class="btn btn--primary" href="mailto:999david01@gmx.at" data-magnetic>
+            <a class="btn btn--primary" href="mailto:999david01@gmx.at">
                 <span class="btn__label">
                     Email me directly
                     <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M5 12h14M13 6l6 6-6 6" />
                     </svg>
                 </span>
@@ -635,7 +586,7 @@
 </footer>
 
 <button class="icon-btn to-top" data-to-top data-zone-sync type="button" aria-label="Back to top">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M12 20V5M6 11l6-6 6 6" />
     </svg>
