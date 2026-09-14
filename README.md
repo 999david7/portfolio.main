@@ -1,6 +1,6 @@
 # Portfolio
 
-Personal portfolio site. Hand-written HTML, CSS and JavaScript on the front end —
+Personal portfolio site. Plain HTML, CSS and JavaScript on the front end —
 no frameworks, no build step, no bundler — with a small hardened Node/Express
 API behind the contact form.
 
