@@ -1,0 +1,24 @@
+{
+  "name": "David — Developer & Designer",
+  "short_name": "David",
+  "description": "Portfolio of David — developer and designer building fast, clean web experiences.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f3ea",
+  "theme_color": "#f7f3ea",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "imgs/personal_buisness_logo-removebg-preview.png",
+      "sizes": "500x500",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
