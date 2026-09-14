@@ -45,8 +45,20 @@ Everything lives in two files.
 are all custom properties declared once in `:root`. To restyle the site, edit
 the tokens.
 
-The look is deliberately plain and professional: one neutral type family,
-squared corners, and a restrained accent used for links, labels and figures.
+The theme follows [999gabriel.me](https://999gabriel.me): warm paper and ink
+rather than cool greys, no accent hue, square corners throughout, a condensed
+uppercase display face over an old-style serif, and wide-tracked uppercase
+section labels.
+
+Two colours carry the whole design — `#fcfbf8` paper and `#17140f` ink. Every
+rule, muted label and faint caption is one of them at reduced alpha, so
+emphasis comes from weight, tracking and hairline rules rather than colour.
+The only chromatic values on the page are the two state colours (form errors
+and the availability marker).
+
+The display face is Oswald and the serif is Cormorant Garamond, both from
+Google Fonts. The reference uses licensed Balboa and Shadow Light files of its
+own; Oswald is the fallback its own stylesheet names for Balboa.
 
 Motion is kept subtle and functional — it responds to you rather than
 performing. Sections fade up as they arrive; buttons, cards, chips and links
@@ -56,8 +68,8 @@ only `transform` and `opacity`. The two standing animations are the
 availability dot and the wave on the hero button.
 
 The page runs **light at the top and dark from the transition band down** —
-one continuous scroll, not a theme switch. `:root` holds the light palette and
-the `.dark` class re-declares the same token names; because custom properties
+one continuous scroll, not a theme switch. `:root` holds the paper palette and
+the `.dark` class swaps the same two colours round; because custom properties
 inherit, everything inside a `.dark` wrapper flips with no per-component rules.
 `projects.html` and `404.html` carry `.dark` on `<body>`, since they continue
 the dark half of the home page.

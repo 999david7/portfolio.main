@@ -22,58 +22,59 @@
 -------------------------------------------------------------------------- */
 
 :root {
-    /* Surface + ink */
-    --bg: #f7f7f8;
+    /* Paper and ink. Two colours carry the whole design — every other value
+       here is one of them at reduced alpha. */
+    --bg: #fcfbf8;
     --bg-2: #ffffff;
-    --bg-3: #f0f0f2;
+    --bg-3: #f3f1eb;
     --surface: #ffffff;
-    --surface-2: #fafafb;
-    --border: #e0e1e4;
-    --border-strong: #c4c6cb;
-    --text: #1a1d23;
-    --text-muted: #575d68;
-    --text-faint: #848a94;
+    --surface-2: #faf8f4;
+    --border: rgba(23, 20, 15, 0.13);
+    --border-strong: rgba(23, 20, 15, 0.3);
+    --text: #17140f;
+    --text-muted: rgba(23, 20, 15, 0.62);
+    --text-faint: rgba(23, 20, 15, 0.48);
 
-    /* Accent — used sparingly: links, labels, figures, the active nav item. */
-    --accent: #b23a1a;
-    --accent-soft: #fbf1ed;
-    --accent-line: #e8c7bb;
+    /* Monochrome: emphasis comes from weight, tracking and rules rather than
+       from hue, so the "accent" is simply the ink. */
+    --accent: #17140f;
+    --accent-soft: rgba(23, 20, 15, 0.05);
+    --accent-line: rgba(23, 20, 15, 0.22);
 
-    /* Status */
-    --danger: #b3261e;
-    --success: #1a6b45;
+    /* The only two chromatic values, and only for state. */
+    --danger: #8f2f1f;
+    --success: #4a6b3f;
 
-    /* Primary button: solid ink, white label. */
-    --btn-bg: #1a1d23;
-    --btn-bg-hover: #33383f;
-    --btn-fg: #ffffff;
+    --btn-bg: #17140f;
+    --btn-bg-hover: #332d22;
+    --btn-fg: #fcfbf8;
 
-    /* Elevation — barely there. */
-    --shadow-sm: 0 1px 2px rgba(20, 24, 31, 0.06);
-    --shadow-md: 0 1px 3px rgba(20, 24, 31, 0.08), 0 4px 12px rgba(20, 24, 31, 0.05);
-    --card-shadow: var(--shadow-sm);
+    --shadow-sm: 0 1px 2px rgba(23, 20, 15, 0.05);
+    --shadow-md: 0 1px 3px rgba(23, 20, 15, 0.07), 0 6px 18px rgba(23, 20, 15, 0.05);
+    --card-shadow: none;
 
     /* Motion */
-    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
     --t-fast: 120ms;
     --t: 200ms;
     --t-slow: 380ms;
 
-    /* Type — one neutral family throughout. */
-    --font-ui: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        "Helvetica Neue", Arial, sans-serif;
+    /* Type: a condensed uppercase display face over an old-style serif. */
+    --font-ui: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --font-display: "Oswald", "Arial Narrow", "Helvetica Neue", sans-serif;
+    --tracking-label: 0.22em;
 
-    /* Radius — squared off, not pill-shaped. */
-    --r-sm: 3px;
-    --r-md: 5px;
-    --r-lg: 7px;
+    /* Square, throughout. --r-full stays for dots and the spinner. */
+    --r-sm: 0;
+    --r-md: 0;
+    --r-lg: 0;
     --r-full: 999px;
 
     /* Layout */
-    --maxw: 1080px;
-    --gutter: clamp(1.15rem, 4vw, 2rem);
-    --nav-h: 64px;
-    --section-pad: clamp(3.5rem, 7vw, 5.5rem);
+    --maxw: 1180px;
+    --gutter: clamp(1.5rem, 5vw, 4rem);
+    --nav-h: 68px;
+    --section-pad: clamp(4rem, 9vw, 7rem);
 
     color-scheme: light;
 }
@@ -81,28 +82,28 @@
 /* ---- The dark half of the page ----------------------------------------- */
 
 .dark {
-    --bg: #08090c;
-    --bg-2: #101318;
-    --bg-3: #161a20;
-    --surface: #101318;
-    --surface-2: #161a20;
-    --border: #262b33;
-    --border-strong: #3b414b;
-    --text: #eceef1;
-    --text-muted: #a2a9b4;
-    --text-faint: #7b828d;
+    /* The same two colours, swapped. */
+    --bg: #17140f;
+    --bg-2: #1f1b15;
+    --bg-3: #26211a;
+    --surface: #1f1b15;
+    --surface-2: #26211a;
+    --border: rgba(252, 251, 248, 0.15);
+    --border-strong: rgba(252, 251, 248, 0.32);
+    --text: #fcfbf8;
+    --text-muted: rgba(252, 251, 248, 0.72);
+    --text-faint: rgba(252, 251, 248, 0.48);
 
-    --accent: #e8734f;
-    --accent-soft: #1d1512;
-    --accent-line: #4a3128;
+    --accent: #fcfbf8;
+    --accent-soft: rgba(252, 251, 248, 0.07);
+    --accent-line: rgba(252, 251, 248, 0.26);
 
-    --danger: #f0857e;
-    --success: #58c295;
+    --danger: #e08a7a;
+    --success: #8fbf7f;
 
-    /* Inverted on dark: near-white plate, ink label. */
-    --btn-bg: #eceef1;
+    --btn-bg: #fcfbf8;
     --btn-bg-hover: #ffffff;
-    --btn-fg: #12151a;
+    --btn-fg: #17140f;
 
     --shadow-sm: none;
     --shadow-md: none;
@@ -146,8 +147,10 @@ body {
     background: var(--bg);
     color: var(--text);
     font-family: var(--font-ui);
-    font-size: 1rem;
-    line-height: 1.65;
+    /* An old-style serif needs size to read well; below ~17px Cormorant goes
+       thin and fragile. The reference sets the same range. */
+    font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.2rem);
+    line-height: 1.6;
 }
 
 body.is-locked {
@@ -178,13 +181,22 @@ select {
 }
 
 ::selection {
-    background: #cfd4dc;
-    color: #14171c;
+    background: var(--text);
+    color: var(--bg);
 }
 
-.dark ::selection {
-    background: #33393f;
-    color: #f2f4f7;
+/* Hairline scrollbar in the rule colour. */
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
 }
 
 :focus-visible {
@@ -252,12 +264,12 @@ main {
 
 .eyebrow {
     display: block;
-    margin-bottom: 0.5rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
+    margin-bottom: 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--text-muted);
 }
 
 .divider {
@@ -273,26 +285,29 @@ h1,
 h2,
 h3,
 h4 {
-    font-weight: 600;
-    line-height: 1.25;
-    letter-spacing: -0.015em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
     color: var(--text);
 }
 
 .h1 {
-    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    font-size: clamp(2.1rem, 5vw, 3.4rem);
+    line-height: 1;
 }
 
 .h2 {
-    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
 }
 
 .h3 {
-    font-size: 1.05rem;
+    font-size: 1.15rem;
 }
 
 .lead {
-    font-size: 1.02rem;
+    font-size: 1.05em;
     color: var(--text-muted);
 }
 
@@ -307,19 +322,32 @@ h4 {
 /* Small metadata label. */
 .mono {
     display: inline-block;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--text-faint);
+}
+
+/* Slots where .mono carries a literal value rather than a label. Addresses
+   and handles are shown as written. */
+.contact__link .mono,
+.drawer__foot .mono {
+    text-transform: none;
+    letter-spacing: 0.02em;
 }
 
 /* Inline links inside body copy get the conventional underline. */
 .link {
-    color: var(--accent);
+    color: inherit;
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--border-strong);
+    transition: text-decoration-color var(--t) var(--ease);
 }
 
 .link:hover {
-    text-decoration-thickness: 2px;
+    text-decoration-color: currentColor;
 }
 
 /* Chips */
@@ -406,9 +434,11 @@ h4 {
     border: 1px solid transparent;
     border-radius: var(--r-sm);
     background: none;
-    font-family: var(--font-ui);
-    font-size: 0.9rem;
+    font-family: var(--font-display);
+    font-size: 0.82rem;
     font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     line-height: 1;
     white-space: nowrap;
     cursor: pointer;
@@ -664,11 +694,13 @@ h4 {
 .nav__brand {
     display: inline-flex;
     align-items: center;
-    gap: 0.55rem;
+    gap: 0.6rem;
     margin-right: auto;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 }
 
 .nav__mark {
@@ -677,10 +709,11 @@ h4 {
     width: 1.75rem;
     height: 1.75rem;
     border-radius: var(--r-sm);
-    background: var(--accent);
-    color: #fff;
+    background: var(--text);
+    color: var(--bg);
+    font-family: var(--font-display);
     font-size: 0.85rem;
-    font-weight: 600;
+    font-weight: 500;
     transition: transform var(--t) var(--ease);
 }
 
@@ -697,7 +730,11 @@ h4 {
 .nav__link {
     position: relative;
     padding: 0.4rem 0.7rem;
-    font-size: 0.9rem;
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--text-muted);
     transition: color var(--t-fast) var(--ease);
 }
@@ -876,18 +913,20 @@ h4 {
 }
 
 .hero__title {
-    max-width: 20ch;
-    font-size: clamp(2rem, 4.6vw, 3rem);
+    max-width: 18ch;
+    font-size: clamp(2.6rem, 7vw, 5rem);
     font-weight: 600;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    line-height: 0.95;
+    letter-spacing: 0.02em;
 }
 
 .hero__role {
-    margin-bottom: 0.4rem;
-    font-size: 0.95rem;
+    margin-bottom: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
-    color: var(--accent);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--text-muted);
 }
 
 .hero__sub {
@@ -921,8 +960,11 @@ h4 {
 }
 
 .hero__meta b {
-    font-size: 1.15rem;
-    font-weight: 600;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
 }
 
 /* Static technology strip — no marquee. */
@@ -966,11 +1008,15 @@ h4 {
     width: 18px;
     height: 18px;
     object-fit: contain;
-    opacity: 0.75;
-    transition: opacity var(--t) var(--ease);
+    /* Monochrome by default, as the reference treats its imagery — colour
+       comes back on hover. */
+    filter: grayscale(1);
+    opacity: 0.7;
+    transition: opacity var(--t) var(--ease), filter var(--t) var(--ease);
 }
 
 .ticker__item:hover img {
+    filter: none;
     opacity: 1;
 }
 
@@ -985,11 +1031,11 @@ h4 {
     height: clamp(12rem, 24vw, 18rem);
     background: linear-gradient(
         180deg,
-        #f7f7f8 0%,
-        #d9d6d6 22%,
-        #4a4143 52%,
-        #14100f 78%,
-        #08090c 100%
+        #fcfbf8 0%,
+        #ddd8cf 22%,
+        #4a4137 52%,
+        #201b14 78%,
+        #17140f 100%
     );
     overflow: hidden;
 }
@@ -1171,10 +1217,13 @@ h4 {
 
 .stat b {
     display: block;
-    font-size: 1.6rem;
-    font-weight: 600;
-    line-height: 1.1;
-    color: var(--accent);
+    font-family: var(--font-display);
+    font-size: 2.1rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--text);
 }
 
 .stat span {
@@ -1194,11 +1243,12 @@ h4 {
 
 .cap__num {
     display: block;
-    margin-bottom: 0.6rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    color: var(--accent);
+    margin-bottom: 0.7rem;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--text-faint);
 }
 
 .cap h3 {
@@ -1235,15 +1285,13 @@ h4 {
 }
 
 .project__tag {
-    padding: 0.15rem 0.5rem;
-    border: 1px solid var(--accent-line);
-    border-radius: var(--r-sm);
-    background: var(--accent-soft);
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--border);
     font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
+    font-weight: 500;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--text-muted);
 }
 
 .project__year {
@@ -1415,11 +1463,15 @@ h4 {
     justify-content: space-between;
     gap: 1.25rem;
     width: 100%;
-    padding: 1rem 0;
+    padding: 1.05rem 0;
     border: 0;
     background: none;
-    font-size: 0.98rem;
+    /* Full sentences: the serif, not the condensed uppercase display. */
+    font-family: var(--font-ui);
+    font-size: 1.05rem;
     font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
     text-align: left;
     cursor: pointer;
     transition: color var(--t-fast) var(--ease);
