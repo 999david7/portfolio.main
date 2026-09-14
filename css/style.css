@@ -1103,6 +1103,52 @@ h4 {
     text-align: right;
 }
 
+/* Live local time. `tabular-nums` keeps the row from twitching as the
+   digits change. The row starts hidden and JS reveals it, so a browser that
+   can't resolve the timezone simply never shows it. */
+.idcard__time {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.idcard__time svg {
+    width: 0.85rem;
+    height: 0.85rem;
+    color: var(--text-faint);
+}
+
+.idcard__time .ic-moon,
+.idcard__time[data-phase="night"] .ic-sun {
+    display: none;
+}
+
+.idcard__time[data-phase="night"] .ic-moon {
+    display: block;
+}
+
+.idcard__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--success);
+}
+
+.idcard__foot {
+    margin-top: 1.15rem;
+    padding-top: 1.15rem;
+    border-top: 1px solid var(--border);
+}
+
+.idcard__logo {
+    transition: transform var(--t-slow) var(--ease);
+}
+
+.idcard:hover .idcard__logo {
+    transform: scale(1.04) rotate(-3deg);
+}
+
 /* Figures */
 .stats {
     display: grid;

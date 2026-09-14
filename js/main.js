@@ -662,6 +662,61 @@
         }
     })();
 
+    /* -------------------------------------------------------------- local time
+       Shows the time where I am, so anyone reading from another timezone knows
+       whether they've caught me awake. Derived entirely from the visitor's
+       clock plus a fixed zone — no request, no API. */
+
+    (function localTime() {
+        const el = $("[data-local-time]");
+        if (!el) return;
+
+        const row = el.closest("[data-time-row]");
+        const phase = el.closest(".idcard__time");
+        const tz = el.dataset.tz || "Europe/Vienna";
+
+        let fmt;
+        try {
+            // formatToParts rather than format(): it gives the hour back on its
+            // own, without having to parse a locale-dependent string.
+            fmt = new Intl.DateTimeFormat("en-GB", {
+                timeZone: tz,
+                hour: "2-digit",
+                minute: "2-digit",
+                hourCycle: "h23",
+            });
+            fmt.formatToParts(new Date());
+        } catch (err) {
+            // Unknown timezone or no Intl — leave the row hidden rather than
+            // showing a placeholder that never fills in.
+            return;
+        }
+
+        function tick() {
+            const parts = fmt.formatToParts(new Date());
+            const get = (type) => {
+                const part = parts.find((p) => p.type === type);
+                return part ? part.value : "";
+            };
+
+            const hh = get("hour");
+            const mm = get("minute");
+            if (!hh || !mm) return;
+
+            el.textContent = `${hh}:${mm}`;
+            el.setAttribute("datetime", `${hh}:${mm}`);
+
+            const hour = Number(hh);
+            if (phase) {
+                phase.dataset.phase = hour >= 7 && hour < 20 ? "day" : "night";
+            }
+        }
+
+        tick();
+        if (row) row.hidden = false;
+        window.setInterval(tick, 15000);
+    })();
+
     /* ------------------------------------------------------------------- year */
 
     (function year() {
