@@ -25,9 +25,9 @@
     /* Paper and ink. Two colours carry the whole design — every other value
        here is one of them at reduced alpha. */
     --bg: #fcfbf8;
-    --bg-2: #ffffff;
+    --bg-2: #fefdf9;
     --bg-3: #f3f1eb;
-    --surface: #ffffff;
+    --surface: #fefdf9;
     --surface-2: #faf8f4;
     --border: rgba(23, 20, 15, 0.13);
     --border-strong: rgba(23, 20, 15, 0.3);
@@ -102,7 +102,7 @@
     --success: #8fbf7f;
 
     --btn-bg: #fcfbf8;
-    --btn-bg-hover: #ffffff;
+    --btn-bg-hover: #fffefa;
     --btn-fg: #17140f;
 
     --shadow-sm: none;
